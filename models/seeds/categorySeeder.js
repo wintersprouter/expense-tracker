@@ -1,5 +1,4 @@
 const Category = require('../Category')
-const categoryList = require('./categoryList.json')
 const db = require('../../config/mongoose')
 
 db.once('open', () => {
