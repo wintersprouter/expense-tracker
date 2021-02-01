@@ -1,0 +1,27 @@
+<form action="/records" method="POST">
+  <label for="name">名稱</label>
+  <input type="text" placeholder="消費品項" name="name" required>
+
+  <label for="date">日期</label>
+  <input type="date" name="date">
+
+  <label for="category">類別</label>
+  <select id="category" class="form-control" name="category" required>
+    <option>選擇支出類型</option>
+    <option>家居物業</option>
+    <option>交通出行</option>
+    <option>休閒娛樂</option>
+    <option>餐飲食品</option>
+    <option>其他</option>
+  </select>
+
+  <label for="merchant">商店</label>
+  <input type="text" placeholder="消費的店家" name="merchant">
+
+  <label for="amount">消費金額</label>
+  <input type="number" placeholder="花了多少錢" name="amount" min="0" step="1" required>
+
+  <button type="submit">新增支出</button>
+</form>
+
+<a href="/">回到首頁</a>
