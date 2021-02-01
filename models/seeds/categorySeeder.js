@@ -3,11 +3,29 @@ const categoryList = require('./categoryList.json')
 const db = require('../../config/mongoose')
 
 db.once('open', () => {
-  for (let i = 0; i < categoryList.length; i++) {
-    Category.create({
-      category: categoryList[i].name,
-      categoryIcon: categoryList[i].icon,
-    })
-  }
+  Category.create(
+    {
+      "category": "home",
+      "categoryIcon": "fas fa-home"
+    },
+    {
+      "category": "transportation",
+      "categoryIcon": "fas fa-shuttle-van"
+    },
+    {
+
+      "category": "entertainment",
+      "categoryIcon": "fas fa-grin-beam"
+    },
+    {
+
+      "category": "food",
+      "categoryIcon": "fas fa-utensils"
+    },
+    {
+      "category": "other",
+      "categoryIcon": "fas fa-pen"
+    },
+  )
   console.log('done')
 })
