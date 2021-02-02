@@ -7,6 +7,9 @@
     {{this.merchant}}
     {{this.amount}}
     <a href="./records/{{ this._id }}/edit">編輯</a>
+    <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+      <button type="submit">delete</button>
+    </form>
   </li>
   {{/each}}
 </ul>

@@ -5,7 +5,7 @@ const Record = require('../../models/Record')
 
 //create new record page
 router.get('/new', (req, res) => {
-  res.render('new', { Category })
+  res.render('new')
 })
 //update a new record
 router.post('/', (req, res) => {
@@ -30,7 +30,15 @@ router.put('/:id', (req, res) => {
       record = Object.assign(record, req.body)
       return record.save()
     })
-    .then(() => res.redirect(`/`))
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+//delete record
+router.delete('/:id', (req, res) => {
+  const id = req.params.id
+  return Record.findById(id)
+    .then(record => record.remove())
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 module.exports = router
