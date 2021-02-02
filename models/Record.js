@@ -7,9 +7,12 @@ const recordSchema = new Schema({
   },
   date: {
     type: String,
-    required: true,
+    required: true
   },
   category: {
+    type: String,
+  },
+  category_ch: {
     type: String,
   },
   categoryIcon: {

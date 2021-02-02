@@ -1,0 +1,28 @@
+<form action="/records/{{record._id}}?_method=PUT" method="POST">
+  <label for="name">名稱</label>
+  <input type="text" placeholder="消費品項" name="name" value="{{ record.name }}" required>
+
+  <label for="date">日期</label>
+  <input type="date" class="form-control" id="date" name="date" placeholder="日期" value="{{record.date}}"
+    autocomplete="on" required>
+
+  <label for="category_ch">類別</label>
+  <select id="category_ch" class="form-control" name="category_ch" required>
+    <option>{{record.category_ch}}</option>
+    <option>家居物業</option>
+    <option>交通出行</option>
+    <option>休閒娛樂</option>
+    <option>餐飲食品</option>
+    <option>其他</option>
+  </select>
+
+  <label for="merchant">商店</label>
+  <input type="text" placeholder="消費的店家" name="merchant" value="{{ record.merchant}}">
+
+  <label for="amount">消費金額</label>
+  <input type="number" placeholder="花了多少錢" name="amount" min="0" step="1" value="{{ record.amount }}" required>
+
+  <button type="submit">儲存變更</button>
+</form>
+
+<a href="/">回到首頁</a>
