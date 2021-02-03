@@ -1,5 +1,6 @@
 <form action="/records/category" method="GET">
-  <select name="category" class="form-control" id='inputType' onChange="this.form.submit()" style="cursor: pointer;">
+  <select name="category" class="custom-select" id='inputType' onChange="this.form.submit()" style="cursor: pointer;"
+    style="width:200px;">
     <option value="" disabled selected>Category</option>
     {{#if keyword}}<option value="{{keyword}}" selected>{{keyword}}</option>{{/if }}
     <option value="Home">Home</option>
@@ -10,7 +11,7 @@
   </select>
 </form>
 {{#if keyword}} <a href="../"><button>Back</button></a>{{/if }}
-<h1>Total:{{totalAmountText}}</h1>
+<h1>Total:${{totalAmountText}}</h1>
 <ul>
   {{#each records}}
   <li>

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Record = require('../../models/Record')
+const { getTotalAmount } = require('../../public/javascripts/getTotalAmount')
 
 router.get('/', (req, res) => {
   const keyword = req.query.category
@@ -13,7 +14,8 @@ router.get('/', (req, res) => {
         })
     })
     .then(records => {
-      res.render('index', { records, keyword })
+      const totalAmountText = getTotalAmount(records)
+      res.render('index', { records, keyword, totalAmountText })
     })
     .catch(error => console.error(error))
 })
