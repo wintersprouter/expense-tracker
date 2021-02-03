@@ -55,6 +55,10 @@ db.once('open', () => {
       "categoryIcon": "fas fa-pen",
       "merchant": "中華電信",
       "amount": 599,
+    }).then(() => {
+      console.log('insert record done...')
+      return db.close()
+    }).then(() => {
+      console.log('database connection close...')
     })
-  console.log('done')
 })

@@ -30,6 +30,10 @@ db.once('open', () => {
       "category_ch": "其他 ",
       "categoryIcon": "fas fa-pen"
     },
-  )
-  console.log('done')
+  ).then(() => {
+    console.log('insert category done...')
+    return db.close()
+  }).then(() => {
+    console.log('database connection close...')
+  })
 })
