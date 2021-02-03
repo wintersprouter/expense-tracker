@@ -1,10 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const Record = require('../../models/Record')
-
+const Category = require('../../models/Category')
 //create new record page
 router.get('/new', (req, res) => {
-  res.render('new')
+  Category.find()
+    .lean()
+    .then(categories => {
+      res.render('new', { categories })
+    })
+    .catch(error => console.error(error))
 })
 //update a new record
 router.post('/', (req, res) => {
@@ -36,10 +41,14 @@ router.post('/', (req, res) => {
 // edit page
 router.get('/:id/edit', (req, res) => {
   const id = req.params.id
-  return Record.findById(id)
+  Category.find()
     .lean()
-    .then((record) => res.render('edit', { record }))
-    .catch(error => console.log(error))
+    .then(categories => {
+      return Record.findById(id)
+        .lean()
+        .then((record) => res.render('edit', { record, categories }))
+    })
+    .catch(error => console.error(error))
 })
 //update new edit
 router.put('/:id', (req, res) => {

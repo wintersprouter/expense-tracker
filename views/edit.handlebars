@@ -9,11 +9,9 @@
   <label for="category_ch">類別</label>
   <select id="category_ch" class="form-control" name="category_ch" required>
     <option>{{record.category_ch}}</option>
-    <option>家居物業</option>
-    <option>交通出行</option>
-    <option>休閒娛樂</option>
-    <option>餐飲食品</option>
-    <option>其他</option>
+    {{#each categories}}
+    <option value="{{this.category_ch}}">{{this.category_ch}}</option>
+    {{/each}}
   </select>
 
   <label for="merchant">商店</label>
