@@ -16,6 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(methodOverride('_method'))
 
+app.use(express.static('public'))
+
 app.use(routes)
 
 app.listen(3000, () => {
