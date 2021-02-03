@@ -10,7 +10,7 @@
   </select>
 </form>
 {{#if keyword}} <a href="../"><button>Back</button></a>{{/if }}
-<h1>Total:{{this.totalAmount}}</h1>
+<h1>Total:{{totalAmountText}}</h1>
 <ul>
   {{#each records}}
   <li>
@@ -19,8 +19,8 @@
     {{this.category_ch}}
     {{this.merchant}}
     {{this.amount}}
-    <a href="./records/{{ this._id }}/edit">編輯</a>
-    <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+    <a href="/records/{{ this._id }}/edit">編輯</a>
+    <form action="/records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
       <button type="submit">delete</button>
     </form>
   </li>
