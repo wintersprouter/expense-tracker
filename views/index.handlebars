@@ -1,3 +1,16 @@
+<form action="/records/category" method="GET">
+  <select name="category" class="form-control" id='inputType' onChange="this.form.submit()" style="cursor: pointer;">
+    <option value="" disabled selected>Category</option>
+    {{#if keyword}}<option value="{{keyword}}" selected>{{keyword}}</option>{{/if }}
+    <option value="home">home</option>
+    <option value="transportation">transportation</option>
+    <option value="entertainment">entertainment</option>
+    <option value="food">food</option>
+    <option value="other">other</option>
+  </select>
+</form>
+{{#if keyword}} <a href="../"><button>Back</button></a>{{/if }}
+<h1>Total:{{this.totalAmount}}</h1>
 <ul>
   {{#each records}}
   <li>
@@ -13,4 +26,4 @@
   </li>
   {{/each}}
 </ul>
-<a href="./records/new">新增一筆支出</a>
+<a href="/records/new">新增一筆支出</a>

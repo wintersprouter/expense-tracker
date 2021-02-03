@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const Category = require('../../models/Category')
 const Record = require('../../models/Record')
 
 //create new record page

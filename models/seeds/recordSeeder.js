@@ -46,6 +46,15 @@ db.once('open', () => {
       "categoryIcon": "fas fa-utensils",
       "merchant": "麥當勞",
       "amount": 120,
+    },
+    {
+      "name": "電話費",
+      "date": "2021-02-04",
+      "category": "other",
+      "category_ch": "其他",
+      "categoryIcon": "fas fa-pen",
+      "merchant": "中華電信",
+      "amount": 599,
     })
   console.log('done')
 })
