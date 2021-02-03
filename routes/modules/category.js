@@ -3,13 +3,13 @@ const router = express.Router()
 const Record = require('../../models/Record')
 
 router.get('/', (req, res) => {
-  const keyword = req.query.category.toLowerCase()
+  const keyword = req.query.category
   Record.find()
     .lean()
     .then(records => {
       return records.filter(
         (record) => {
-          return record.category.toLowerCase().includes(keyword)
+          return record.category.includes(keyword)
         })
     })
     .then(records => {

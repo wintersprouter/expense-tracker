@@ -5,7 +5,7 @@ db.once('open', () => {
   Record.create({
     "name": "租金",
     "date": "2021-02-01",
-    "category": "home",
+    "category": "Home",
     "category_ch": "家居物業",
     "categoryIcon": "fas fa-home",
     "merchant": "房東",
@@ -14,7 +14,7 @@ db.once('open', () => {
     {
       "name": "電影:驚奇隊長",
       "date": "2021-02-03",
-      "category": "entertainment",
+      "category": "Entertainment",
       "category_ch": "休閒娛樂",
       "categoryIcon": "fas fa-grin-beam",
       "merchant": "信義威秀",
@@ -23,7 +23,7 @@ db.once('open', () => {
     {
       "name": "捷運",
       "date": "2021-02-03",
-      "category": "transportation",
+      "category": "Transportation",
       "category_ch": "交通出行",
       "categoryIcon": "fas fa-shuttle-van",
       "merchant": "捷運",
@@ -32,7 +32,7 @@ db.once('open', () => {
     {
       "name": "晚餐",
       "date": "2021-02-03",
-      "category": "food",
+      "category": "Food",
       "category_ch": "餐飲食品",
       "categoryIcon": "fas fa-utensils",
       "merchant": "八方雲集",
@@ -41,7 +41,7 @@ db.once('open', () => {
     {
       "name": "午餐",
       "date": "2021-02-03",
-      "category": "food",
+      "category": "Food",
       "category_ch": "餐飲食品",
       "categoryIcon": "fas fa-utensils",
       "merchant": "麥當勞",
@@ -50,7 +50,7 @@ db.once('open', () => {
     {
       "name": "電話費",
       "date": "2021-02-04",
-      "category": "other",
+      "category": "Other",
       "category_ch": "其他",
       "categoryIcon": "fas fa-pen",
       "merchant": "中華電信",
