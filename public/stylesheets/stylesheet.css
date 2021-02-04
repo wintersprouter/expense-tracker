@@ -1,6 +1,41 @@
 main {
   outline: 3px solid tomato;  /* 暫時觀察用 */
   max-width: 1080px;    /* 限制最大寬度 */
-  margin: 51px auto;      /* 容器水平置中 */
+  margin: 25px auto;      /* 容器水平置中 */
   padding: 40px 40px;  /* 留白 */
+}
+.home{
+  outline: 3px solid rgb(143, 131, 129);
+  padding: 20px 20px;  
+}
+.category-select{
+  width: 200px;
+  height: 40px;
+}
+.filter-all{
+  height: 40px;
+  margin-left:  15px;
+}
+.list-group{
+   max-width: 590px;
+   margin: 25px auto;
+}
+.delete-btn {
+  border: none;
+  background-color: transparent;
+  /* font-size: 12px;  */
+  color:rgba(116, 39, 39, 0.3);
+  /* position: absolute; */
+  /* margin: -10px 0px 0px -10px; */
+}
+.total-amount{
+  /* outline: 3px solid rgb(143, 131, 129); */
+ padding-left: 15px;
+}
+.home-top{
+  max-width: 750px;
+  margin: 0 auto;
+}
+.btn-warning{
+  color: rgb(239, 245, 245);
 }
