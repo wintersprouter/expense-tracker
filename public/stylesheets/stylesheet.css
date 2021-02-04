@@ -1,0 +1,6 @@
+main {
+  outline: 3px solid tomato;  /* 暫時觀察用 */
+  max-width: 1080px;    /* 限制最大寬度 */
+  margin: 51px auto;      /* 容器水平置中 */
+  padding: 40px 40px;  /* 留白 */
+}
