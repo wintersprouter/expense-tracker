@@ -1,11 +1,11 @@
 <div class="container">
   <div class="create-list">
     <div class="create-list-title mb-3 ">
-      <h2 class="display-5">請編輯你的支出</h2>
+      <h2 class="display-5" style="color: #1895A3;">請編輯你的支出</h2>
     </div>
     <form action="/records/{{record._id}}?_method=PUT" method="POST" class="create-list-form mb-3">
       <div class="form-group row">
-        <label for="require" class="col-sm-4 col-form-label">*必填欄位</label>
+        <label for="require" class="col-sm-4 col-form-label" style="color: #FF8080;">*必填欄位</label>
       </div>
       <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">名稱*：</label>
@@ -45,13 +45,13 @@
       </div>
       <div class="form-group row">
         <div class="col-sm-10">
-          <button type="submit" class="btn btn-info">儲存變更</button>
+          <button type="submit" class="btn createButton">儲存變更</button>
         </div>
       </div>
     </form>
     <div class="d-flex justify-content-center ">
       <a href="/">
-        <button type="submit" class="btn btn-primary">回到首頁</button></a>
+        <button type="submit" class="btn backButton">回到首頁</button></a>
     </div>
   </div>
 </div>

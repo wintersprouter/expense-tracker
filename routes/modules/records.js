@@ -16,10 +16,10 @@ router.get('/new', (req, res) => {
 router.post('/', (req, res) => {
   const record = req.body
 
-  const icon = categories.find(category => category.category_ch === record.category_ch).categoryIcon
+  let icon = categories.find(category => category.category_ch === record.category_ch).categoryIcon
   record.categoryIcon = icon
 
-  const en = categories.find(category => category.category_ch === record.category_ch).category
+  let en = categories.find(category => category.category_ch === record.category_ch).category
   record.category = en
 
   if (record.merchant.length === 0) {
@@ -48,10 +48,10 @@ router.put('/:id', (req, res) => {
   const id = req.params.id
   const records = req.body
 
-  const icon = categories.find(category => category.category_ch === records.category_ch).categoryIcon
+  let icon = categories.find(category => category.category_ch === records.category_ch).categoryIcon
   records.categoryIcon = icon
 
-  const en = categories.find(category => category.category_ch === records.category_ch).category
+  let en = categories.find(category => category.category_ch === records.category_ch).category
   records.category = en
 
   if (records.merchant.length === 0) {
