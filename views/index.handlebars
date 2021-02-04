@@ -3,11 +3,9 @@
     style="width:200px;">
     <option value="" disabled selected>Category</option>
     {{#if keyword}}<option value="{{keyword}}" selected>{{keyword}}</option>{{/if }}
-    <option value="Home">Home</option>
-    <option value="Transportation">Transportation</option>
-    <option value="Entertainment">Entertainment</option>
-    <option value="Food">Food</option>
-    <option value="Other">Other</option>
+    {{#each categories}}
+    <option value="{{this.category}}">{{this.category}}</option>
+    {{/each}}
   </select>
 </form>
 {{#if keyword}} <a href="../"><button>Back</button></a>{{/if }}

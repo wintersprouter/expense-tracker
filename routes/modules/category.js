@@ -2,20 +2,15 @@ const express = require('express')
 const router = express.Router()
 const Record = require('../../models/Record')
 const { getTotalAmount } = require('../../public/javascripts/getTotalAmount')
+const categories = require('../../models/seeds/category.json').results
 
 router.get('/', (req, res) => {
   const keyword = req.query.category
-  Record.find()
+  Record.find({ category: keyword })
     .lean()
     .then(records => {
-      return records.filter(
-        (record) => {
-          return record.category.includes(keyword)
-        })
-    })
-    .then(records => {
       const totalAmountText = getTotalAmount(records)
-      res.render('index', { records, keyword, totalAmountText })
+      res.render('index', { records, keyword, totalAmountText, categories })
     })
     .catch(error => console.error(error))
 })

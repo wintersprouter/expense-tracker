@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Record = require('../../models/Record')
 const Category = require('../../models/Category')
+const categories = require('../../models/seeds/category.json').results
 //create new record page
 router.get('/new', (req, res) => {
   Category.find()
@@ -13,31 +14,23 @@ router.get('/new', (req, res) => {
 })
 //update a new record
 router.post('/', (req, res) => {
-  if (req.body.merchant.length === 0) {
-    req.body.merchant = '其他'
-  }
-  if (req.body.category_ch === '其他') {
-    req.body.category = 'Other'
-  }
-  if (req.body.category_ch === '家居物業') {
-    req.body.category = 'Home'
-  }
-  if (req.body.category_ch === '交通出行') {
-    req.body.category = 'Transportation'
-  }
-  if (req.body.category_ch === '休閒娛樂') {
-    req.body.category = 'Entertainment'
-  }
-  if (req.body.category_ch === '餐飲食品') {
-    req.body.category = 'Food'
-  }
-
   const record = req.body
-  return Record.create(record)
 
+  const icon = categories.find(category => category.category_ch === record.category_ch).categoryIcon
+  record.categoryIcon = icon
+
+  const en = categories.find(category => category.category_ch === record.category_ch).category
+  record.category = en
+
+  if (record.merchant.length === 0) {
+    record.merchant = '其他'
+  }
+
+  Record.create(record)
     .then(() => res.redirect('/'))
-    .catch(error => console.log('error!'))
+    .catch(error => console.log(error))
 })
+
 // edit page
 router.get('/:id/edit', (req, res) => {
   const id = req.params.id
@@ -53,27 +46,20 @@ router.get('/:id/edit', (req, res) => {
 //update new edit
 router.put('/:id', (req, res) => {
   const id = req.params.id
-  if (req.body.merchant.length === 0) {
-    req.body.merchant = '其他'
-  }
-  if (req.body.category_ch === '家居物業') {
-    req.body.category = 'Home'
-  }
-  if (req.body.category_ch === '交通出行') {
-    req.body.category = 'Transportation'
-  }
-  if (req.body.category_ch === '休閒娛樂') {
-    req.body.category = 'Entertainment'
-  }
-  if (req.body.category_ch === '餐飲食品') {
-    req.body.category = 'Food'
-  }
-  if (req.body.category_ch === '其他') {
-    req.body.category = 'Other'
+  const records = req.body
+
+  const icon = categories.find(category => category.category_ch === records.category_ch).categoryIcon
+  records.categoryIcon = icon
+
+  const en = categories.find(category => category.category_ch === records.category_ch).category
+  records.category = en
+
+  if (records.merchant.length === 0) {
+    records.merchant = '其他'
   }
   return Record.findById(id)
     .then(record => {
-      record = Object.assign(record, req.body)
+      record = Object.assign(record, records)
       return record.save()
     })
     .then(() => res.redirect('/'))
