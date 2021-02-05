@@ -11,10 +11,10 @@
       <form action="/records/category" method="GET">
         <select name="category" class="custom-select category-select " id='inputType' onChange="this.form.submit()"
           style="cursor: pointer;">
-          <option value="" disabled selected>Category</option>
-          {{#if keyword}}<option value="{{keyword}}" selected>{{keyword}}</option>{{/if }}
+          <option value="" disabled selected>類別</option>
+          {{#if keyword}}<option value="{{keyword}}" selected>{{filterOption}}</option>{{/if }}
           {{#each categories}}
-          <option value="{{this.category}}">{{this.category}}</option>
+          <option value="{{this.category}}" name="{{this.category}}">{{this.category_ch}}</option>
           {{/each}}
         </select>
       </form>

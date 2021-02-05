@@ -9,8 +9,9 @@ router.get('/', (req, res) => {
   Record.find({ category: keyword })
     .lean()
     .then(records => {
+      let filterOption = categories.find(category => category.category === keyword).category_ch
       const totalAmountText = getTotalAmount(records)
-      res.render('index', { records, keyword, totalAmountText, categories })
+      res.render('index', { records, keyword, totalAmountText, categories, filterOption })
     })
     .catch(error => console.error(error))
 })
