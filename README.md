@@ -31,7 +31,15 @@ cd expense-tracker
 輸入npm run dev指令
 於任一瀏覽器輸入 http://localhost:3000 
 ```
-
+## Screen Photo - 專案畫面
+![image](https://raw.githubusercontent.com/Chia-HuiHsueh/expense-tracker/master/public/image/index.png)
+首頁-所有支出總覽
+![image](https://raw.githubusercontent.com/Chia-HuiHsueh/expense-tracker/master/public/image/create.png)
+新增支出
+![image](https://raw.githubusercontent.com/Chia-HuiHsueh/expense-tracker/master/public/image/edit.png)
+編輯支出
+![image](https://raw.githubusercontent.com/Chia-HuiHsueh/expense-tracker/master/public/image/category-food.png)
+分類帳
 ## Environment SetUp - 環境建置
 * Visual Studio Code - 開發環境
 * Node.js - JavaScript 執行環境
