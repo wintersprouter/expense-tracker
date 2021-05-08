@@ -27,13 +27,13 @@ let userController = {
           email,
           password
       })
-      .then(() => res.redirect('/users/login'))
+      .then(() => res.redirect('/login'))
       .catch(err => res.status(404))
     })
   },
   userLogout:(req, res) => {
     req.logout()
-    res.redirect('/users/login')
+    res.redirect('/login')
   },
 } 
 module.exports = userController

@@ -6,7 +6,7 @@ const passport = require('passport')
 router.get('/login', userController.getLoginPage)
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect:'login'
+  failureRedirect: true
 }) , userController.userLogin)
 
 router.get('/logout', userController.userLogout)

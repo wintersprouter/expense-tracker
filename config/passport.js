@@ -7,11 +7,11 @@ module.exports = app => {
   app.use(passport.session())
   
   passport.use(new LocalStrategy({ 
-    usernameField: 'account',
+    usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true,
-  } , (account, password, done) => {
-    User.findOne({ account })
+  } , (req, email, password, done) => {
+    User.findOne({ email })
     .then(user => {
       if (!user) {
         req.flash('warning_msg', '帳號或密碼輸入錯誤')
