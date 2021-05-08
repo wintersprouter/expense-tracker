@@ -13,9 +13,9 @@ let userController = {
   },
   userRegister:(req, res) => {
     const { name, email, password, confirmPassword } = req.body
-    User.findOne({email}).then(user => {
+    User.findOne({ email }).then(user => {
       if (user) {
-        console.log('使用者已存在！')
+        req.flash('warning_msg', '此信箱已存在')
         return res.render('register', {
           name,
           email,
