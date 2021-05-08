@@ -14,3 +14,10 @@
   </button>
 </div>
 {{/if}}
+{{#if error_msg}}
+<div class="alert alert-danger" role="alert" style="margin: 30px 0 ;">
+  {{error_msg}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+</div>
+{{/if}}
