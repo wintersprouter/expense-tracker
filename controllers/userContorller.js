@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const bcrypt = require('bcryptjs')
 
 let userController = {
   getLoginPage: (req, res) => {
@@ -23,11 +24,15 @@ let userController = {
           req.flash('error_msg', '此信箱已存在')
           return res.redirect('register')
         } else { 
-          User.create({
-            name,
-            email,
-            password
-          })
+          return bcrypt
+          .genSalt(10)
+          .then(salt => bcrypt.hash(password, salt)) 
+          .then(hash => 
+            User.create({
+              name,
+              email,
+              password: hash
+            }))
           .then(user => {
             req.flash('success_msg', '成功註冊帳號！')
             return res.redirect('/login')
