@@ -2,11 +2,12 @@
   <div class="col-md-6 col-lg-5 m-auto " style="width:420px">
     <div class="card card-body">
       <h2 class="text-center mt-3">登入</h2>
+      {{> message}}
       <form action="/users/login" method="POST">
         <div class="form-group">
-          <label for="email">信箱</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" value="{{email}}"
-            autocomplete=on>
+          <label for="account">帳號</label>
+          <input type="account" id="account" name="account" class="form-control" placeholder="Enter Account"
+            value="{{account}}" autocomplete=on>
         </div>
         <div class="form-group">
           <label for="password">密碼</label>
