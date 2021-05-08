@@ -5,6 +5,7 @@ const home = require('./modules/home')
 const records = require('./modules/records')
 const category = require('./modules/category')
 const users = require('./modules/users')
+const auth = require('./modules/auth')
 
 const authenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -15,6 +16,7 @@ const authenticated = (req, res, next) => {
 }
 
 router.use('/', users)  
+router.use('/auth', auth) 
 router.use('/', authenticated, home)
 router.use('/records', authenticated, records)
 router.use('/records/category', authenticated, category)
