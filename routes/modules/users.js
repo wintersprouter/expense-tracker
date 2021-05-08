@@ -10,29 +10,28 @@ router.post('/login',  passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/users/login'
 }))
+
 router.get('/register', (req, res) => {
   res.render('register')
 })
 
 router.post('/register', (req, res) => {
-  const { name, email, account, password, confirmPassword } = req.body
-  User.findOne({$or:[{email},{account}]}).then(user => {
+  const { name, email, password, confirmPassword } = req.body
+  User.findOne({email}).then(user => {
     if (user) {
       console.log('使用者已存在！')
       return res.render('register', {
         name,
         email,
-        account,
         password,
         confirmPassword
       })
     } return User.create({
         name,
         email,
-        account,
         password
       })
-      .then(() => res.redirect('/'))
+      .then(() => res.redirect('/users/login'))
       .catch(err => res.status(404))
   })
 })

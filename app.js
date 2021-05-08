@@ -25,10 +25,17 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+app.use(flash())
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(methodOverride('_method'))
+
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
+  next()
+}) 
 
 usePassport(app)
 
