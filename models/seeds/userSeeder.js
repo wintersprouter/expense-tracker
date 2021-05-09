@@ -1,6 +1,7 @@
 const db = require('../../config/mongoose')
 const User = require('../User')
 const Record = require('../Record')
+const Category = require('../Category')
 const recordList = require('../seeds/record.json')
 const bcrypt = require('bcryptjs')
 
@@ -24,11 +25,13 @@ db.once('open', () => {
       }))
       .then(user => {
         const userId = user._id
+        // const categoryId = category._id
+        console.log( 'userId', userId  )
         return Promise.all(Array.from(
           { length: 3 },
           (_, i) => Record.create(
             {
-              ...recordList.results[(i + (index * 3))], userId
+              ...recordList.results[(i + (index * 3))], userId 
             })
         ))
       })

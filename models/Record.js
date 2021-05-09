@@ -6,20 +6,15 @@ const recordSchema = new Schema({
   },
   date: {
     type: String,
-  },
-  category: {
-    type: String,
-  },
-  category_ch: {
-    type: String,
-  },
-  categoryIcon: {
+    required: true
   },
   merchant: {
     type: String,
   },
   amount: {
     type: Number,
+    min: [1, 'at least one dollar'],
+    required: true
   },
   totalAmount: {
     type: Number,
@@ -29,6 +24,12 @@ const recordSchema = new Schema({
     ref: 'User',
     index: true,
     required: true
-  }
+  },
+  categoryID:{ 
+    type: Schema.Types.ObjectId,
+    ref: 'Category',
+    index: true,
+    required: true
+  },
 })
 module.exports = mongoose.model('Record', recordSchema)
