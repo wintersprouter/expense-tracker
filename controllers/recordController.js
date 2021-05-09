@@ -1,6 +1,6 @@
 const Record = require('../models/Record')
 const Category = require('../models/Category')
-const categories = require('../models/seeds/category.json').results
+// const categories = require('../models/seeds/category.json').results
 
 let recordController = {
 

@@ -1,6 +1,6 @@
 const Record = require('../models/Record')
 const { getTotalAmount } = require('../public/javascripts/getTotalAmount')
-const categories = require('../models/seeds/category.json').results
+// const categories = require('../models/seeds/category.json').results
 
 let homeController = {
 
