@@ -1,20 +1,5 @@
 <div class="container ">
-  {{#if success_msg}}
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{{success_msg}}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  {{/if}}
-  {{#if warning_msg}}
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    {{{warning_msg}}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  {{/if}}
+  {{> message}}
   <div class="home-top d-flex  align-items-center row">
     <div class="total-amount col-sm-7  ">
       <span class="ml-5 d-flex">
@@ -30,7 +15,7 @@
           <option value="" disabled selected>類別</option>
           {{#if keyword}}<option value="{{keyword}}" selected>{{filterOption}}</option>{{/if }}
           {{#each categories}}
-          <option value="{{this.category}}" name="{{this.category}}">{{this.category_ch}}</option>
+          <option value="{{this.title}}" name="{{this.title}}">{{this.title}}</option>
           {{/each}}
         </select>
       </form>
@@ -46,7 +31,7 @@
 
       <div class="record row d-flex row justify-content-between align-items-center">
         <div class="col-sm-1">
-          <div class="record-icon"><i class="{{this.categoryIcon}} fa-3x list-icon"></i></div>
+          <div class="record-icon"><i class="{{ this.category.icon}} fa-3x list-icon"></i></div>
         </div>
 
         <div class="col-sm-4 d-flex flex-column justify-content-center">

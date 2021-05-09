@@ -1,21 +1,27 @@
+const Category = require('../models/Category')
 const Record = require('../models/Record')
 const { getTotalAmount } = require('../public/javascripts/getTotalAmount')
-// const categories = require('../models/seeds/category.json').results
+
 
 let homeController = {
 
   getHomePage: ( req,res ) => {
     const userId = req.user._id
-    Record.find({ userId }) 
+    Category.find()
     .lean()
-    .sort({ date: 'desc' })
-    .then(records => {
-      const totalAmountText = getTotalAmount(records)
-      res.render('index', { records, totalAmountText, categories })
-    })
-    .catch(error => res.status(404))
-  }
-
+    .sort({ _id: 'asc' })
+    .then(categories => {
+      Record.find({ userId }) 
+      .populate('category')
+      .lean()
+      .sort({ date: 'desc' })
+      .then(records => {
+        const totalAmountText = getTotalAmount(records)
+        res.render('index', { records, totalAmountText, categories })
+      }).catch(error => res.status(404))
+    }).catch(error => res.status(404))
+  },
+  
 }
 
 module.exports = homeController
