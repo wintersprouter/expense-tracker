@@ -20,7 +20,11 @@ const PORT = process.env.PORT || 3000
 
 require('./config/mongoose')
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main', extname: '.handlebars' }))
+app.engine('handlebars', exphbs({ 
+  defaultLayout: 'main', 
+  extname: '.handlebars',
+  helpers: require('./config/handlebars-helpers')
+}))
 app.set('view engine', 'handlebars')
 
 app.use(session({

@@ -23,9 +23,11 @@
         <label for="category_ch" class="col-sm-2 col-form-label">類別*：</label>
         <div class="col-sm-10">
           <select id="category_ch" class="form-control" name="category_ch" required>
-            <option>{{record.category_ch}}</option>
             {{#each categories}}
-            <option value="{{this.category_ch}}">{{this.category_ch}}</option>
+            <option value="{{this.category_ch}}" {{#ifCond this.category_ch ../record.category_ch}} selected
+              {{/ifCond}}>
+              {{this.category_ch}}
+            </option>
             {{/each}}
           </select>
         </div>
