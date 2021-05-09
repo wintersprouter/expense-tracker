@@ -1,6 +1,6 @@
 const Record = require('../models/Record')
 const Category = require('../models/Category')
-// const categories = require('../models/seeds/category.json').results
+
 
 let recordController = {
 
@@ -72,7 +72,10 @@ let recordController = {
     const _id = req.params.id
     return Record.findOne({ _id, userId })
     .then(record => record.remove())
-    .then(() => res.redirect('/'))
+    .then(record => {
+      req.flash('success_msg', `${record.name} 此筆記錄已成功刪除!`)
+      res.redirect('/')
+    })
     .catch(error => res.status(404))
   }
 }  
