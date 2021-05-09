@@ -1,16 +1,18 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 const Category = require('../Category')
 const db = require('../../config/mongoose')
 
 const categories = [
-  ['家居物業', 'fa-home', 'home'],
-  ['交通出行', 'fa-shuttle-van', 'transportation'],
-  ['休閒娛樂', 'fa-grin-beam', 'entertainment'],
-  ['餐飲食品', 'fa-utensils', 'food'],
-  ['其他', 'fa-pen','other']
+  ['家居物業', 'fa-home'],
+  ['交通出行', 'fa-shuttle-van'],
+  ['休閒娛樂', 'fa-grin-beam'],
+  ['餐飲食品', 'fa-utensils'],
+  ['其他', 'fa-pen']
 ].map(category => ({
-  category_ch: category[0],
-  categoryIcon: `<i class="fas ${category[1]}"></i>`,
-  category:category[2],
+  title: category[0],
+  icon: `<i class="fas ${category[1]}"></i>`,
 }))
 db.once('open', () => {
   Category.create(categories)

@@ -1,13 +1,11 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const categorySchema = new Schema({
-  category: {
+  title: {
     type: String,
+    trim: true,
   },
-  category_ch: {
-    type: String,
-  },
-  categoryIcon: {
+  icon: {
     type: String,
   },
   records: [{
