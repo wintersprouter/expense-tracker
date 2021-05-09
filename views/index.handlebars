@@ -31,7 +31,7 @@
 
       <div class="record row d-flex row justify-content-between align-items-center">
         <div class="col-sm-1">
-          <div class="record-icon"><i class="{{ this.category.icon}} fa-3x list-icon"></i></div>
+          <div class="record-icon"><i class="{{this.category.icon}} fa-3x list-icon"></i></div>
         </div>
 
         <div class="col-sm-4 d-flex flex-column justify-content-center">
@@ -45,7 +45,7 @@
 
 
         <div class="col-sm-3 d-flex justify-content-between">
-          <a href=" /records/{{ this._id }}/edit"><i class="fas fa-edit fa-2x"></i></a>
+          <a href=" /records/{{this._id}}/edit"><i class="fas fa-edit fa-2x"></i></a>
 
           <button type="button" data-toggle="modal" data-target="#delete{{this._id}}" class="delete-btn"><i
               class="fas fa-trash fa-2x" style="cursor: pointer;"></i></button>
