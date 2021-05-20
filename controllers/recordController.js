@@ -33,13 +33,15 @@ let recordController = {
   getEditPage: (req,res) => {
     const userId = req.user._id
     const _id = req.params.id
-    Category.findOne({ title: record.category })
+    Record.findOne({ _id, userId })
+    .populate('category')
     .lean()
-    .sort({ _id: 'asc' })
-    .then(categories => {
-      return Record.findOne({ _id, userId })
-      .lean()
-      .then((record) => res.render('edit', { record, categories }))
+    .then(record =>{
+      Category.find()
+        .lean()
+        .sort({ _id: 'asc' })
+        .then(categories => res.render('edit', { record, categories }))
+        .catch(error => res.status(404))
     })
     .catch(error => res.status(404))
   },

@@ -20,13 +20,16 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="category_ch" class="col-sm-2 col-form-label">類別*：</label>
+        <label for="category" class="col-sm-2 col-form-label">類別*：</label>
         <div class="col-sm-10">
-          <select id="category_ch" class="form-control" name="category_ch" required>
+          <select id="category" class="form-control" name="category" required>
             {{#each categories}}
-            <option value="{{this.category_ch}}" {{#ifCond this.category_ch ../record.category_ch}} selected
+            <option value="{{this.title}}" 
+            {{#ifCond this.title
+            ../record.category.title}} 
+            selected
               {{/ifCond}}>
-              {{this.category_ch}}
+              {{this.title}}
             </option>
             {{/each}}
           </select>
@@ -35,7 +38,7 @@
       <div class="form-group row">
         <label for="merchant" class="col-sm-2 col-form-label">商店：</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" placeholder="消費的店家" name="merchant" value="{{ record.merchant}}">
+          <input type="text" class="form-control" placeholder="消費的店家" name="merchant" value="{{ record.merchant }}">
         </div>
       </div>
       <div class="form-group row">
