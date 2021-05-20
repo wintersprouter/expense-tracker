@@ -7,6 +7,7 @@ let recordController = {
   getAddRecordPage:(req,res) => {
     Category.find()
     .lean()
+    .sort({ _id: 'asc' })
     .then(categories => {
       res.render('new', { categories })
     })
@@ -14,31 +15,27 @@ let recordController = {
   },
 
   addRecord: (req,res) => {
-    const userId = req.user._id
     const record = req.body
-
-    let icon = categories.find(category => category.category_ch === record.category_ch).categoryIcon
-
-    record.categoryIcon = icon
-
-    let en = categories.find(category => category.category_ch === record.category_ch).category
-
-  record.category = en
-
-  if (record.merchant.length === 0) {
-    record.merchant = '其他'
-  }
-
-  Record.create({ record, userId })
-    .then(() => res.redirect('/'))
+    Category.findOne({ title: record.category })
+    .then(category => {
+      record.userId = req.user._id
+      record.category = category._id
+      Record.create( record )
+      .then(record => {
+        req.flash('success_msg', `${record.name} 已成功新增一筆記錄!`)
+        return res.redirect('/')
+      })
+      .catch(error => res.status(404))
+    })
     .catch(error => res.status(404))
   },
 
   getEditPage: (req,res) => {
     const userId = req.user._id
     const _id = req.params.id
-    Category.find()
+    Category.findOne({ title: record.category })
     .lean()
+    .sort({ _id: 'asc' })
     .then(categories => {
       return Record.findOne({ _id, userId })
       .lean()

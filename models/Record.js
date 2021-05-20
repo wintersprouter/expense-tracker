@@ -6,7 +6,7 @@ const recordSchema = new Schema({
   },
   date: {
     type: String,
-    required: true
+    default: Date.now,
   },
   merchant: {
     type: String,
@@ -27,9 +27,7 @@ const recordSchema = new Schema({
   },
   category:{ 
     type: Schema.Types.ObjectId,
-    ref: 'Category',
-    index: true,
-    required: true
+    ref: 'Category'
   },
 })
 module.exports = mongoose.model('Record', recordSchema)
