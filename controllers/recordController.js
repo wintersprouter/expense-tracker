@@ -24,7 +24,7 @@ let recordController = {
       record.category = category._id
       Record.create( record )
       .then(record => {
-        req.flash('success_msg', `${record.name} 已成功新增${record.name} 的記錄!`)
+        req.flash('success_msg', `${record.name} 已成功新增${record.name}的記錄!`)
         return res.redirect('/')
       })
       .catch(error => res.status(404))
@@ -62,7 +62,7 @@ let recordController = {
       record.category = category._id
       return Record.findOneAndUpdate({_id, userId },record)
       .then(record => {
-        req.flash('success_msg', `已成功修改${record.name} 的記錄!`)
+        req.flash('success_msg', `已成功修改${record.name}的記錄!`)
         return res.redirect('/')
       })
       .catch(error => res.status(404))
@@ -72,8 +72,7 @@ let recordController = {
   deleteRecord: (req,res) => {
     const userId = req.user._id
     const _id = req.params.id
-    return Record.findOne({ _id, userId })
-    .then(record => record.remove())
+    return Record.findOneAndDelete({ _id, userId })
     .then(record => {
       req.flash('success_msg', ` ${record.name}此筆記錄已成功刪除!`)
       res.redirect('/')
