@@ -9,17 +9,18 @@
       </span>
     </div>
     <div class="filter-options d-flex justify-content-center col-sm-5">
-      <form action="/records/category" method="GET">
-        <select name="category" class="custom-select category-select " id='inputType' onChange="this.form.submit()"
+      <form action="/filter" method="GET">
+        <select name="options" class="custom-select category-select " id='inputType' onChange="this.form.submit()"
           style="cursor: pointer;">
-          <option value="" disabled selected>類別</option>
-          {{#if keyword}}<option value="{{keyword}}" selected>{{filterOption}}</option>{{/if }}
+          <option value=" "{{#if filteredCategory}}disabled{{/if}}>選擇支出類別</option>
           {{#each categories}}
-          <option value="{{this.title}}" name="{{this.title}}">{{this.title}}</option>
+          <option value="{{this.title}}" name="filteredCategory"{{#ifCond 
+          this.title ../filteredCategory }} 
+            selected {{/ifCond}}>{{this.title}}</option>
           {{/each}}
         </select>
       </form>
-      {{#if keyword}} <a href="../"><button type="button" class="btn  filter-all">All</button></a>{{/if
+      {{#if filteredCategory}} <a href="../"><button type="button" class="btn  filter-all">All</button></a>{{/if
       }}
       <i class="fas fa-funnel-dollar fa-3x mx-3"></i>
     </div>
