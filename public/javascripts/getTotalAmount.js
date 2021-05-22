@@ -9,7 +9,5 @@ module.exports = {
     }
     const totalAmountText = totalAmount.toString()
     return totalAmountText
-  },
+  }
 }
-
-

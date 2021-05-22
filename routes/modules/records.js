@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const recordController = require ('../../controllers/recordController')
+const recordController = require('../../controllers/recordController')
 
 router.get('/new', recordController.getAddRecordPage)
 router.post('/', recordController.addRecord)

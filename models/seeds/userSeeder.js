@@ -27,28 +27,28 @@ db.once('open', () => {
         password: hash
       }))
       .then(user => {
-      const userId = user._id
-      return Category.find()
-        .lean()
-        .sort({ _id: 'asc' })
-        .then(categories => categories.map(category => category._id))
-        .then(categoriesId => {
-          const SEED_RECORDS = []
+        const userId = user._id
+        return Category.find()
+          .lean()
+          .sort({ _id: 'asc' })
+          .then(categories => categories.map(category => category._id))
+          .then(categoriesId => {
+            const SEED_RECORDS = []
             for (let i = 1; i < 11; i++) {
               SEED_RECORDS.push({
                 name: faker.commerce.product(),
                 category: categoriesId[i % 5],
-                date:faker.date.past().toJSON().substr(0,10) ,
+                date: faker.date.past().toJSON().substr(0, 10),
                 amount: faker.commerce.price(),
                 merchant: faker.company.companyName(),
                 userId
               })
             }
-          return SEED_RECORDS
-        })
-        .then(records => Record.create(records))
-        .catch(err => console.log(err))
-    })
+            return SEED_RECORDS
+          })
+          .then(records => Record.create(records))
+          .catch(err => console.log(err))
+      })
       .then(() => {
         console.log('done.')
         process.exit()

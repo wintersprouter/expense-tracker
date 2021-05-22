@@ -12,7 +12,7 @@ const categories = [
   ['其他', 'fa-pen']
 ].map(category => ({
   title: category[0],
-  icon: `fas ${category[1]}`,
+  icon: `fas ${category[1]}`
 }))
 db.once('open', () => {
   Category.create(categories)

@@ -7,7 +7,7 @@ const categorySchema = new Schema({
     required: true
   },
   icon: {
-    type: String,
+    type: String
   },
   records: [{
     type: Schema.Types.ObjectId,

@@ -14,8 +14,8 @@ const authenticated = (req, res, next) => {
   res.redirect('/login')
 }
 
-router.use('/', users)  
-router.use('/auth', auth) 
+router.use('/', users)
+router.use('/auth', auth)
 router.use('/', authenticated, home)
 router.use('/records', authenticated, records)
 
