@@ -1,29 +1,48 @@
-<div class="container ">
+<div class="container d-flex flex-column justify-content-center mt-5">
   {{> message}}
-  <div class="home-top d-flex  align-items-center row">
-    <div class="total-amount col-sm-7  ">
-      <span class="ml-5 d-flex">
-        <h3 class="mr-4">Total:
-        </h3>
-        <h1 class="display-3" style="color: #FF8080;">${{totalAmountText}}</h1>
-      </span>
+  <div class="d-flex justify-content-between mt-3 row">
+    <div class="col-sm-6">
+      <h3 class="mr-3">Total:
+      </h3>
+        </div>
+        <div class="col-sm-6">
+      <h1 class="display-3" style="color: #FF8080;">${{totalAmountText}}</h1>
     </div>
-    <div class="filter-options d-flex justify-content-center col-sm-5">
-      <form action="/filter" method="GET">
-        <select name="options" class="custom-select category-select " id='inputType' onChange="this.form.submit()"
-          style="cursor: pointer;">
-          <option value=" "{{#if filteredCategory}}disabled{{/if}}>選擇支出類別</option>
-          {{#each categories}}
-          <option value="{{this.title}}" name="filteredCategory"{{#ifCond 
-          this.title ../filteredCategory }} 
-            selected {{/ifCond}}>{{this.title}}</option>
-          {{/each}}
-        </select>
-      </form>
-      {{#if filteredCategory}} <a href="../"><button type="button" class="btn  filter-all">All</button></a>{{/if
+  </div>
+  <div class="filter-options d-flex justify-content-between mt-1">
+
+    <form action="/filter" method="GET" class="row d-flex  align-items-end justify-content-between mb-3">
+
+    <select name="month" class="month-select form-control col-lg-5 col-sm-12 col-12 mt-1" id="month" onChange="this.form.submit()"
+      style="cursor: pointer;">
+      
+      <option value=" " {{#if filteredMonth}}disabled{{/if}}>支出月份</option>
+        {{#each months}}
+        <option value="{{this.month}}" name="filteredMonth" {{#ifCond this ../filteredMonth }} selected {{/ifCond}}>
+          {{this.month}}月份</option>
+        {{/each}}
+      </select>
+
+      <select name="category" class="category-select form-control col-lg-5  col-sm-12 col-12 mt-1" id="category" onChange="this.form.submit()"
+        style="cursor: pointer;">
+        <option value=" " {{#if filteredCategory}}disabled{{/if}}>支出類別</option>
+        {{#each categories}}
+        <option value="{{this.title}}" name="filteredCategory" {{#ifCond this.title ../filteredCategory }} selected
+          {{/ifCond}}>{{this.title}}</option>
+        {{/each}}
+      </select>
+    </div>
+    
+    <div class="filter-all col-lg-2  col-sm-12 col-12 mt-1">
+      {{#if filteredCategory}} <a href="../"><button type="button" class="btn btn-primary ">Reset</button></a>{{/if
       }}
-      <i class="fas fa-funnel-dollar fa-3x mx-3"></i>
     </div>
+    
+
+    </form>
+    
+  </div>
+
   </div>
 
   <ul class="list-group">

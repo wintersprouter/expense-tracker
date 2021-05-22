@@ -1,0 +1,77 @@
+body {
+  background-color: #f3f3f3;
+}
+main {
+  /* outline: 3px solid tomato;   */
+  max-width: 1080px;
+  margin: 25px auto;
+  padding: 40px 40px;
+}
+.container {
+  /* outline: 3px solid rgb(143, 131, 129); */
+  padding: 20px 20px;
+}
+.category-select,
+.month-select {
+  width: 169px;
+  height: 40px;
+}
+.filter-all {
+  height: 40px;
+  text-align: right;
+  /* background-color: #1895a3;
+  color: beige;  */
+}
+.backButton {
+  background-color: #1895a3;
+  color: beige;
+}
+.fa-funnel-dollar {
+  color: #f5d998;
+}
+.list-group {
+  max-width: 590px;
+  margin: 25px auto;
+}
+.list-icon {
+  color: #53c9a6;
+}
+.fa-edit {
+  color: #f5d998;
+}
+.delete-btn {
+  border: none;
+  background-color: transparent;
+  color: #ff8080;
+}
+.total-amount {
+  padding-left: 15px;
+}
+.home-top,
+.create-list {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.record-amount-text {
+  font-weight: bold;
+  font-size: 2rem;
+}
+.createButton {
+  color: #03031b;
+  background-color: #b5ebda;
+}
+
+/* new page */
+.create-list-title {
+  /* outline: 3px solid rgb(143, 131, 129); */
+  text-align: center;
+}
+.create-list-form {
+  /* outline: 3px solid rgb(143, 131, 129); */
+  max-width: 580px;
+  margin: 0 auto;
+}
+.col-form-label {
+  font-size: 20px;
+}

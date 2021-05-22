@@ -6,6 +6,10 @@ const homeController = {
 
   getHomePage: (req, res) => {
     const userId = req.user._id
+    let months = []
+    for ( i = 0 ; i < 12 ; i++) {
+      months.push({ month: `${i + 1}`})
+    }
     Category.find()
       .lean()
       .sort({ _id: 'asc' })
@@ -16,14 +20,21 @@ const homeController = {
           .sort({ date: 'desc' })
           .then(records => {
             const totalAmountText = getTotalAmount(records)
-            res.render('index', { records, totalAmountText, categories })
+            res.render('index', { records, totalAmountText, categories, months })
           }).catch(error => res.status(404))
       }).catch(error => res.status(404))
   },
 
   filterRecords: (req, res) => {
-    const filteredCategory = req.query.options // selected category title
+    const filteredCategory = req.query.category // selected category title
+    const filteredMonth = req.query.month
+    let months = []
+    for ( i = 0 ; i < 12 ; i++) {
+      months.push({ month: `${i + 1}`})
+    }
+
     const filter = { userId: req.user._id }
+    
     Category.find({})
       .lean()
       .sort({ _id: 'asc' })
@@ -39,7 +50,7 @@ const homeController = {
           .sort({ date: 'desc' })
           .then(records => {
             const totalAmountText = getTotalAmount(records)
-            return res.render('index', { records, totalAmountText, categories, filteredCategory })
+            return res.render('index', { records, totalAmountText, categories, months, filteredCategory, filteredMonth})
           })
           .catch(error => res.status(404))
       })
