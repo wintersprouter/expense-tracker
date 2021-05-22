@@ -25,39 +25,20 @@ let homeController = {
   filterRecords: ( req,res ) => {
     const filteredCategory  = req.query.options //selected category title
     const filter = { userId: req.user._id }
-  console.log(filteredCategory)
-  console.log(req.user._id)
-  // Category.findOne({ title:filteredCategory })
-  // .lean()
-  // .then((item) => {
-  //   if ( filteredCategory) {
-  //       filter.category = item._id
-  //       console.log(item._id)
-  //       console.log(filter)
-  //     }
-  // }) 
-
-
-  return Category.find({})
+    Category.find({})
     .lean()
+    .sort({ _id: 'asc' })
     .then((categories) => {
-      // Category.findOne({ title:filteredCategory })
-      // .lean()
-      // .then((item) => {
-      //   if ( filteredCategory) {
-      //     filter.category = item._id
-      //     console.log(item._id)
-      //     console.log(filter)
-      // }}) 
-  Record.find({ 
-        filter
+      categories.forEach(category => {
+        if (filteredCategory.includes(category.title)) {
+          filter.category = category._id
+        }
       })
-      .then( ()=> console.log(filter))
+      Record.find( filter )
       .populate('category')
       .lean()
       .sort({ date: 'desc' })
-      // .exec()
-      .then(records => {
+      .then( records => {
         const totalAmountText = getTotalAmount(records)
         return res.render('index', { records, totalAmountText, categories,filteredCategory })
     })
