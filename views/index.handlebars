@@ -15,8 +15,6 @@
 
     <select name="month" class="month-select form-control col-lg-5 col-sm-12 col-12 mt-1" id="month" onChange="this.form.submit()"
       style="cursor: pointer;">
-      
-      <option value=" " {{#if filteredMonthText}}disabled{{/if}}>支出月份</option>
       <option value="all" name="filteredMonth" {{#ifCond this.month ../filteredMonthText }} selected {{/ifCond}}>
         {{this.month}}所有月份</option>
         {{#each months}}
@@ -27,7 +25,8 @@
 
       <select name="category" class="category-select form-control col-lg-5  col-sm-12 col-12 mt-1" id="category" onChange="this.form.submit()"
         style="cursor: pointer;">
-        <option value=" " {{#if filteredCategory}}disabled{{/if}}>支出類別</option>
+        <option value="all" name="filteredCategory" {{#ifCond this.title ../filteredCategory }} selected {{/ifCond}}>
+        所有類別</option>
         {{#each categories}}
         <option value="{{this.title}}" name="filteredCategory" {{#ifCond this.title ../filteredCategory }} selected
           {{/ifCond}}>{{this.title}}</option>
