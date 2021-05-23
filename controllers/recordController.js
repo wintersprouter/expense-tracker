@@ -39,6 +39,7 @@ const recordController = {
       .populate('category')
       .lean()
       .then(record => {
+        record.date = record.date.toJSON().substr(0, 10)
         Category.find()
           .lean()
           .sort({ _id: 'asc' })

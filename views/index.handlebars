@@ -18,7 +18,7 @@
       
       <option value=" " {{#if filteredMonth}}disabled{{/if}}>支出月份</option>
         {{#each months}}
-        <option value="{{this.month}}" name="filteredMonth" {{#ifCond this ../filteredMonth }} selected {{/ifCond}}>
+        <option value="{{this.month}}" name="filteredMonth" {{#ifCond this.month ../filteredMonth }} selected {{/ifCond}}>
           {{this.month}}月份</option>
         {{/each}}
       </select>

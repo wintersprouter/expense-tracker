@@ -20,6 +20,9 @@ const homeController = {
           .sort({ date: 'desc' })
           .then(records => {
             const totalAmountText = getTotalAmount(records)
+            records.forEach(record => {
+            record.date = record.date.toJSON().substr(0, 10)
+          })
             res.render('index', { records, totalAmountText, categories, months })
           }).catch(error => res.status(404))
       }).catch(error => res.status(404))
@@ -50,6 +53,9 @@ const homeController = {
           .sort({ date: 'desc' })
           .then(records => {
             const totalAmountText = getTotalAmount(records)
+            records.forEach(record => {
+            record.date = record.date.toJSON().substr(0, 10)
+          })
             return res.render('index', { records, totalAmountText, categories, months, filteredCategory, filteredMonth})
           })
           .catch(error => res.status(404))
