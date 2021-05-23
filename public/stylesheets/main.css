@@ -1,0 +1,15 @@
+body {
+  /* Font or other */
+  background-color: #f3f3f3;
+}
+main {
+  /* Box Model */
+  outline: 3px solid tomato;
+  max-width: 1080px;
+  margin: 25px auto;
+  padding: 40px 40px;
+}
+.container {
+  /* outline: 3px solid rgb(143, 131, 129); */
+  padding: 20px 20px;
+}
