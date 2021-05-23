@@ -16,9 +16,11 @@
     <select name="month" class="month-select form-control col-lg-5 col-sm-12 col-12 mt-1" id="month" onChange="this.form.submit()"
       style="cursor: pointer;">
       
-      <option value=" " {{#if filteredMonth}}disabled{{/if}}>支出月份</option>
+      <option value=" " {{#if filteredMonthText}}disabled{{/if}}>支出月份</option>
+      <option value="all" name="filteredMonth" {{#ifCond this.month ../filteredMonthText }} selected {{/ifCond}}>
+        {{this.month}}所有月份</option>
         {{#each months}}
-        <option value="{{this.month}}" name="filteredMonth" {{#ifCond this.month ../filteredMonth }} selected {{/ifCond}}>
+        <option value="{{this.month}}" name="filteredMonth" {{#ifCond this.month ../filteredMonthText }} selected {{/ifCond}}>
           {{this.month}}月份</option>
         {{/each}}
       </select>
@@ -37,12 +39,8 @@
       {{#if filteredCategory}} <a href="../"><button type="button" class="btn btn-primary ">Reset</button></a>{{/if
       }}
     </div>
-    
-
     </form>
-    
   </div>
-
   </div>
 
   <ul class="list-group">

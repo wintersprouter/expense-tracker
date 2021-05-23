@@ -30,14 +30,28 @@ const homeController = {
 
   filterRecords: (req, res) => {
     const filteredCategory = req.query.category // selected category title
-    const filteredMonth = req.query.month
+    const filteredMonth = Number(req.query.month)-1 
+    const filteredMonthText = req.query.month
+    const filter = { 
+      userId: req.user._id,
+    }
+
     let months = []
     for ( i = 0 ; i < 12 ; i++) {
       months.push({ month: `${i + 1}`})
     }
 
-    const filter = { userId: req.user._id }
-    
+    if (filteredMonth >= 0) {
+      const today = new Date()
+      const thisYear = today.getUTCFullYear()
+    //month:0-11
+    let startTime = new Date ( thisYear,filteredMonth ,1)
+    let endTime = new Date ( thisYear, filteredMonth , 31)
+    filter.date ={ 
+        $gte: startTime ,
+        $lte: endTime }
+    }
+
     Category.find({})
       .lean()
       .sort({ _id: 'asc' })
@@ -56,7 +70,7 @@ const homeController = {
             records.forEach(record => {
             record.date = record.date.toJSON().substr(0, 10)
           })
-            return res.render('index', { records, totalAmountText, categories, months, filteredCategory, filteredMonth})
+            return res.render('index', { records, totalAmountText, categories, months, filteredCategory, filteredMonthText})
           })
           .catch(error => res.status(404))
       })
