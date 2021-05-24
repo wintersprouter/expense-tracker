@@ -1,3 +1,7 @@
+.container {
+  outline: 3px solid rgb(61, 13, 184);
+  padding: 20px 20px;
+}
 .category-select,
 .month-select {
   width: 169px;

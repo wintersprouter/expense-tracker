@@ -9,7 +9,10 @@ main {
   margin: 25px auto;
   padding: 40px 40px;
 }
-.container {
-  /* outline: 3px solid rgb(143, 131, 129); */
-  padding: 20px 20px;
+
+.navbar {
+  background: white;
+}
+.navbar-brand {
+  font-weight: bolder;
 }
