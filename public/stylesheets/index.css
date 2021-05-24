@@ -1,28 +1,64 @@
 .container {
-  outline: 3px solid rgb(61, 13, 184);
-  padding: 20px 20px;
+  /* outline: 3px solid rgb(61, 13, 184); */
+  padding: 0 25px;
+}
+.total-amount {
+  /* outline: 3px solid rgb(184, 13, 127); */
+  width: 590px;
+
+  margin: auto;
+}
+.filter-options {
+  /* outline: 3px solid rgb(12, 9, 233); */
+  width: 590px;
+  margin: 10px auto;
+}
+.select-form {
+  /* outline: 3px solid rgb(19, 37, 2); */
+  width: 400px;
+  margin: 2px;
+}
+@media (max-width: 576px) {
+  .total-amount {
+    width: 320px;
+  }
+  .filter-options {
+    width: 320px;
+  }
+  .reset-button,
+  .create-button {
+    text-align: right;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 1000px) {
+  .filter-options {
+    width: 590px;
+  }
+
+  .reset-button,
+  .create-button {
+    text-align: right;
+  }
 }
 .category-select,
 .month-select {
-  width: 169px;
   height: 40px;
+  margin-top: 5px;
+  margin-bottom: 2px;
 }
-.filter-all {
+.reset-button {
   height: 40px;
-  text-align: right;
-  /* background-color: #1895a3;
-  color: beige;  */
+  margin-top: 5px;
 }
-.backButton {
-  background-color: #1895a3;
-  color: beige;
-}
-.fa-funnel-dollar {
-  color: #f5d998;
-}
+
 .list-group {
   max-width: 590px;
-  margin: 25px auto;
+  margin: 10px auto;
+}
+
+.record {
+  border-radius: 20%;
 }
 .list-icon {
   color: #53c9a6;
@@ -38,17 +74,8 @@
 .total-amount {
   padding-left: 15px;
 }
-.home-top,
-.create-list {
-  max-width: 750px;
-  margin: 0 auto;
-}
 
 .record-amount-text {
   font-weight: bold;
   font-size: 2rem;
-}
-.createButton {
-  color: #03031b;
-  background-color: #b5ebda;
 }
