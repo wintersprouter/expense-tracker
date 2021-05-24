@@ -17,8 +17,7 @@
     <nav class="navbar  fixed-top">
       <a href="/"><span class="navbar-brand mb-0 h1" style="color:#6C757D;font-size:1.5rem;">
         {{#if isAuthenticated}}
-          {{#if user.name }}{{user.name}}{{else}}{{user.email}}{{/if}}
-        的{{/if}}家庭記帳本<i class="fas fa-money-check-alt mx-1" style="color:#F5D998;"></i></span></a>
+          {{#if user.name }}{{user.name}}{{else}}{{user.email}}{{/if}}的{{/if}}家庭記帳本<i class="fas fa-money-check-alt mx-1" style="color:#F5D998;"></i></span></a>
       {{#if isAuthenticated}}
       <a href="/logout" class="btn btn-outline-secondary">Logout</a>
       {{else}}

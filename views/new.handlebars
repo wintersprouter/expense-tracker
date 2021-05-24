@@ -3,30 +3,34 @@
 </header>
 <div class="container">
   <div class="create-list">
-    <div class="create-list-title mb-3">
+    <div class="create-list-title">
       <h2 class="display-5" style="color: #1895A3;">請輸入你的支出</h2>
+    </div>
+    <div class="back-button d-flex flex-row-reverse">
+      <a href="/">
+        <button type="submit" class="btn back-button-btn">回到首頁</button></a>
     </div>
     <form action="/records" method="POST" class="create-list-form mb-3">
       <div class="form-group row">
         <label for="require" class="col-sm-4 col-form-label" style="color: #FF8080;">*必填欄位</label>
       </div>
       <div class="form-group row">
-        <label for="name" class="col-sm-2 col-form-label">名稱*：</label>
-        <div class="col-sm-10">
+        <label for="name" class="col-sm-3 col-form-label">名稱*：</label>
+        <div class="col-sm-8">
           <input type="text" class="form-control" placeholder="消費品項" name="name" required>
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="date" class="col-sm-2 col-form-label">日期*：</label>
-        <div class="col-sm-10">
+        <label for="date" class="col-sm-3 col-form-label">日期*：</label>
+        <div class="col-sm-8">
           <input type="date" class="form-control" name="date" required>
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="category" class="col-sm-2 col-form-label">類別*：</label>
-        <div class="col-sm-10">
+        <label for="category" class="col-sm-3 col-form-label">類別*：</label>
+        <div class="col-sm-8">
           <select id="category" class="form-control" name="category" placeholder="選擇支出類型" autocomplete="off" required>
             <option value="" disabled selected>選擇類型</option>
             {{#each categories}}
@@ -37,28 +41,23 @@
       </div>
 
       <div class="form-group row">
-        <label for="merchant" class="col-sm-2 col-form-label">商店：</label>
-        <div class="col-sm-10">
+        <label for="merchant" class="col-sm-3 col-form-label">商店：</label>
+        <div class="col-sm-8">
           <input type="text" class="form-control" placeholder="消費的店家" name="merchant">
         </div>
       </div>
       <div class="form-group row">
-        <label for="amount" class="col-sm-2 col-form-label">金額*：</label>
-        <div class="col-sm-10">
+        <label for="amount" class="col-sm-3 col-form-label">金額*：</label>
+        <div class="col-sm-8">
           <input type="number" class="form-control" placeholder="花了多少錢" name="amount" min="0" max="100000000" step="1"
             required>
         </div>
       </div>
       <div class="form-group row">
-        <div class="col-sm-10">
-          <button type="submit" class="btn createButton">新增支出</button>
+        <div class="create col-sm-8 ">
+          <button type="submit" class="btn create-button">新增支出</button>
         </div>
       </div>
     </form>
-
-    <div class="d-flex justify-content-center ">
-      <a href="/">
-        <button type="submit" class="btn backButton">回到首頁</button></a>
-    </div>
   </div>
 </div>

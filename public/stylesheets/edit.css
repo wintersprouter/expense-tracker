@@ -1,13 +1,25 @@
 /* new page */
 .create-list-title {
-  /* outline: 3px solid rgb(143, 131, 129); */
   text-align: center;
+  margin-top: 50px;
 }
 .create-list-form {
-  /* outline: 3px solid rgb(143, 131, 129); */
   max-width: 580px;
   margin: 0 auto;
 }
 .col-form-label {
   font-size: 20px;
+}
+.back-button-btn {
+  color: beige;
+  background-color: #1895a3;
+}
+.create {
+  display: flex;
+  margin: auto;
+}
+.create-button {
+  margin: 20px auto;
+  color: beige;
+  background-color: #ff8080;
 }
