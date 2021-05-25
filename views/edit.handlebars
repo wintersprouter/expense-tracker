@@ -10,6 +10,7 @@
       <a href="/">
         <button type="submit" class="btn back-button-btn">回到首頁</button></a>
     </div>
+    <div class="edit-form">
     <form action="/records/{{record._id}}?_method=PUT" method="POST" class="create-list-form mb-3">
       <div class="form-group row">
         <label for="require" class="col-sm-3 col-form-label" style="color: #FF8080;">*必填欄位</label>
@@ -57,9 +58,11 @@
       </div>
       <div class="form-group row">
         <div class="create col-sm-8 ">
-          <button type="submit" class="btn create-button">新增支出</button>
+          <button type="submit" class="btn create-button">儲存變更</button>
         </div>
       </div>
     </form>
+    </div>
+    </div>
   </div>
 </div>
