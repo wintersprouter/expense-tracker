@@ -1,24 +1,27 @@
+<header>
+  <link rel="stylesheet" href="/stylesheets/login.css">
+</header>
 <div class="row my-5">
   <div class="col-md-6 col-lg-5 m-auto " style="width:420px">
-    <div class="card card-body">
+      <div class="login">
       <h2 class="text-center mt-3">登入</h2>
       {{> message}}
       <form action="/login" method="POST">
         <div class="form-group">
-          <label for="email">信箱</label>
+          <label for="email">信箱</label><i class="far fa-envelope ml-1"></i>
           <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" value="{{email}}"
             autocomplete=on>
         </div>
         <div class="form-group">
-          <label for="password">密碼</label>
+          <label for="password">密碼</label><i class="fas fa-lock ml-1"></i></i>
           <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
         </div>
-        <button type="submit" class="btn btn-info btn-block">登入</button>
-        <a href="/auth/facebook" class="btn btn-primary btn-block">Facebook 登入</a>
+        <button type="submit" class="btn btn-block btn-outline-secondary">登入</button>
+        <a href="/auth/facebook" class="btn btn-outline-primary btn-block">Facebook 登入</a>
       </form>
       <p class="lead mt-4">
         沒有帳號？ <a href="/register">註冊</a>
       </p>
-    </div>
+      </div>
   </div>
 </div>

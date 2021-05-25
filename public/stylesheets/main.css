@@ -4,7 +4,7 @@ body {
 }
 main {
   /* Box Model */
-  outline: 3px solid tomato;
+  /* outline: 3px solid tomato; */
   max-width: 1080px;
   margin: 25px auto;
   padding: 40px 40px;

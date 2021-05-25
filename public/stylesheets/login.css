@@ -1,0 +1,16 @@
+.login {
+  padding: 25px;
+
+  border-radius: 25px;
+  background-color: white;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+h2,
+.fa-lock,
+.fa-envelope {
+  color: #6c757d;
+}
