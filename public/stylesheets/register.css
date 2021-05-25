@@ -1,0 +1,20 @@
+.register {
+  padding: 25px;
+  border-radius: 25px;
+  background-color: white;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+h2,
+.fa-user,
+.fa-lock,
+.fa-envelope,
+.fa-check-double {
+  color: #6c757d;
+}
+small {
+  color: #ff8080;
+}
