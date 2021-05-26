@@ -14,7 +14,7 @@ const userController = {
   },
   userRegister: (req, res) => {
     const { name, email, password, confirmPassword } = req.body
-    if (req.body.confirmPassword !== req.body.password) {
+    if (confirmPassword !== password) {
       req.flash('error_msg', '兩次密碼輸入不同！')
       return res.redirect('/register')
     } else {

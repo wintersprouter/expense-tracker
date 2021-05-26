@@ -7,8 +7,8 @@ const homeController = {
   getHomePage: (req, res) => {
     const userId = req.user._id
     let months = []
-    for ( i = 0 ; i < 12 ; i++) {
-      months.push({ month: `${i + 1}`})
+    for (i = 0; i < 12; i++) {
+      months.push({ month: `${i + 1}` })
     }
     Category.find()
       .lean()
@@ -21,8 +21,8 @@ const homeController = {
           .then(records => {
             const totalAmountText = getTotalAmount(records)
             records.forEach(record => {
-            record.date = record.date.toJSON().substr(0, 10)
-          })
+              record.date = record.date.toJSON().substr(0, 10)
+            })
             res.render('index', { records, totalAmountText, categories, months })
           }).catch(error => res.status(404))
       }).catch(error => res.status(404))
@@ -30,26 +30,27 @@ const homeController = {
 
   filterRecords: (req, res) => {
     const filteredCategory = req.query.category // selected category title
-    const filteredMonth = Number(req.query.month)-1 
+    const filteredMonth = Number(req.query.month) - 1
     const filteredMonthText = req.query.month
-    const filter = { 
-      userId: req.user._id,
+    const filter = {
+      userId: req.user._id
     }
 
     let months = []
-    for ( i = 0 ; i < 12 ; i++) {
-      months.push({ month: `${i + 1}`})
+    for (i = 0; i < 12; i++) {
+      months.push({ month: `${i + 1}` })
     }
 
     if (filteredMonth >= 0) {
       const today = new Date()
       const thisYear = today.getUTCFullYear()
-    //month:0-11
-    let startTime = new Date ( thisYear,filteredMonth ,1)
-    let endTime = new Date ( thisYear, filteredMonth , 31)
-    filter.date ={ 
-        $gte: startTime ,
-        $lte: endTime }
+      // month:0-11
+      let startTime = new Date(thisYear, filteredMonth, 1)
+      let endTime = new Date(thisYear, filteredMonth, 31)
+      filter.date = {
+        $gte: startTime,
+        $lte: endTime
+      }
     }
 
     Category.find({})
@@ -68,9 +69,9 @@ const homeController = {
           .then(records => {
             const totalAmountText = getTotalAmount(records)
             records.forEach(record => {
-            record.date = record.date.toJSON().substr(0, 10)
-          })
-            return res.render('index', { records, totalAmountText, categories, months, filteredCategory, filteredMonthText})
+              record.date = record.date.toJSON().substr(0, 10)
+            })
+            return res.render('index', { records, totalAmountText, categories, months, filteredCategory, filteredMonthText })
           })
           .catch(error => res.status(404))
       })
