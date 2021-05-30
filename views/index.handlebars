@@ -65,13 +65,14 @@
           <div class="record-icon"><i class="{{this.category.icon}} fa-3x list-icon"></i></div>
         </div>
 
-        <div class="col-sm-4 d-flex flex-column justify-content-center">
-          <h2 style="font-size: 20px;color:#1895A3;font-weight:bold;">{{this.name}}</h2>
-          <h3 style="font-size: 12px;">{{this.date}}</h3>
+        <div class="col-sm-4 d-flex flex-column justify-content-center record-text">
+          <h2 style="font-size: 1.5rem;color:#1895A3;font-weight:bold;">{{this.name}}</h2>
+          <h3 style="font-size: 0.5rem;">{{this.date}}</h3>
+          <h3 style="font-size: 0.5rem;">{{this.merchant}}</h3>
         </div>
 
         <div class=" col-sm-1 d-flex justify-content-end">
-          <div class="record-amount-text" style="color:#1895A3;">${{this.amount}}</div>
+          <div class="record-amount-text" style="color:#1895A3;font-size: 2rem">${{this.amount}}</div>
         </div>
         <div class="col-sm-3 d-flex justify-content-between">
           <a href=" /records/{{this._id}}/edit"><i class="fas fa-edit fa-2x"></i></a>

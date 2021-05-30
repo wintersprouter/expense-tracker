@@ -60,6 +60,9 @@
 .record {
   border-radius: 20%;
 }
+.record-text {
+  margin-top: 10px;
+}
 .list-icon {
   color: #53c9a6;
 }
