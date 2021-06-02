@@ -6,7 +6,7 @@ const homeController = {
 
   getHomePage: (req, res) => {
     const userId = req.user._id
-    let months = []
+    const months = []
     for (i = 0; i < 12; i++) {
       months.push({ month: `${i + 1}` })
     }
@@ -36,7 +36,7 @@ const homeController = {
       userId: req.user._id
     }
 
-    let months = []
+    const months = []
     for (i = 0; i < 12; i++) {
       months.push({ month: `${i + 1}` })
     }
@@ -45,8 +45,8 @@ const homeController = {
       const today = new Date()
       const thisYear = today.getUTCFullYear()
       // month:0-11
-      let startTime = new Date(thisYear, filteredMonth, 1)
-      let endTime = new Date(thisYear, filteredMonth, 31)
+      const startTime = new Date(thisYear, filteredMonth, 1)
+      const endTime = new Date(thisYear, filteredMonth, 31)
       filter.date = {
         $gte: startTime,
         $lte: endTime
