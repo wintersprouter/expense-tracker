@@ -7,7 +7,7 @@ const homeController = {
   getHomePage: (req, res) => {
     const userId = req.user._id
     const months = []
-    for (i = 0; i < 12; i++) {
+    for (let i = 0; i < 12; i++) {
       months.push({ month: `${i + 1}` })
     }
     Category.find()
@@ -29,7 +29,7 @@ const homeController = {
   },
 
   filterRecords: (req, res) => {
-    const filteredCategory = req.query.category // selected category title
+    const filteredCategory = req.query.category
     const filteredMonth = Number(req.query.month) - 1
     const filteredMonthText = req.query.month
     const filter = {
@@ -37,8 +37,12 @@ const homeController = {
     }
 
     const months = []
-    for (i = 0; i < 12; i++) {
+    for (let i = 0; i < 12; i++) {
       months.push({ month: `${i + 1}` })
+    }
+
+    if (filteredCategory !== 'all') {
+      filter.category = filteredCategory
     }
 
     if (filteredMonth >= 0) {
@@ -58,9 +62,7 @@ const homeController = {
       .sort({ _id: 'asc' })
       .then((categories) => {
         categories.forEach(category => {
-          if (filteredCategory.includes(category.title)) {
-            filter.category = category._id
-          }
+          category._id = JSON.stringify(category._id).slice(1, -1)
         })
         Record.find(filter)
           .populate('category')

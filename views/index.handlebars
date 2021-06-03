@@ -27,10 +27,10 @@
 
       <select name="category" class="category-select form-control col-md-5  col-sm-7  " id="category" onChange="this.form.submit()"
         style="cursor: pointer;">
-        <option value="all" name="filteredCategory" {{#ifCond this.title ../filteredCategory }} selected {{/ifCond}}>
+        <option value="all" name="filteredCategory" {{#ifCond " all"../filteredCategory }} selected {{/ifCond}}>
         所有類別</option>
         {{#each categories}}
-        <option value="{{this.title}}" name="filteredCategory" {{#ifCond this.title ../filteredCategory }} selected
+        <option value="{{this._id}}" name="filteredCategory" {{#ifCond this._id ../filteredCategory }} selected
           {{/ifCond}}>{{this.title}}</option>
         {{/each}}
       </select>
