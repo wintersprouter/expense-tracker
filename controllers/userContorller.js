@@ -59,14 +59,14 @@ const userController = {
     } catch (err) {
       console.log(err)
       res.render('register', {
-          name,
-          email,
-          password,
-          confirmPassword
-        })
+        name,
+        email,
+        password,
+        confirmPassword
+      })
     }
   },
-  
+
   userLogout: (req, res) => {
     req.logout()
     req.flash('success_msg', '你已經成功登出。')
