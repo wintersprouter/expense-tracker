@@ -32,9 +32,9 @@
         <div class="col-sm-8">
           <select id="category" class="form-control" name="category" required>
             {{#each categories}}
-            <option value="{{this.title}}" 
-            {{#ifCond this.title
-            ../record.category.title}} 
+            <option value="{{this._id}}" 
+            {{#ifCond this._id
+            ../record.category._id}} 
             selected
               {{/ifCond}}>
               {{this.title}}

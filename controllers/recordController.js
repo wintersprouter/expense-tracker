@@ -3,82 +3,74 @@ const Category = require('../models/Category')
 
 const recordController = {
 
-  getAddRecordPage: (req, res) => {
-    Category.find()
+  getAddRecordPage: async (req, res) => {
+    try {
+    const categories = await Category.find()
       .lean()
       .sort({ _id: 'asc' })
-      .then(categories => {
         res.render('new', { categories })
-      })
-      .catch(error => res.status(404))
+      } catch (err) {
+    console.log(err)
+  }
   },
 
-  addRecord: (req, res) => {
-    const record = req.body
-    if (record.merchant.length === 0) {
-      record.merchant = '其他'
+  addRecord: async (req, res) => {
+    try {
+    const newRecord = req.body
+    if ( newRecord.merchant.length === 0) {
+      newRecord.merchant = '其他'
     }
-    Category.findOne({ title: record.category })
-      .then(category => {
-        record.userId = req.user._id
-        record.category = category._id
-        Record.create(record)
-          .then(record => {
-            req.flash('success_msg', `已成功新增${record.name}的記錄!`)
-            return res.redirect('/')
-          })
-          .catch(error => res.status(404))
-      })
-      .catch(error => res.status(404))
+    newRecord.userId = req.user._id
+    
+    const [category,record] = await Promise.all([
+      Category.findOne({ _id: newRecord.category }),Record.create(newRecord)
+    ])
+        req.flash('success_msg', `已成功新增${record.name}的記錄!`)
+        return res.redirect('/')
+        
+    } catch (err) {
+    console.log(err)
+    }
   },
 
-  getEditPage: (req, res) => {
+  getEditPage: async (req, res) => {
+    try {
     const userId = req.user._id
     const _id = req.params.id
-    Record.findOne({ _id, userId })
-      .populate('category')
-      .lean()
-      .then(record => {
+    const [record,categories] = await Promise.all([Record.findOne({ _id, userId }).populate('category').lean(),Category.find().lean().sort({ _id: 'asc' })])
         record.date = record.date.toJSON().substr(0, 10)
-        Category.find()
-          .lean()
-          .sort({ _id: 'asc' })
-          .then(categories => res.render('edit', { record, categories }))
-          .catch(error => res.status(404))
-      })
-      .catch(error => res.status(404))
+        return res.render('edit', { record, categories })
+    } catch (err) {
+    console.log(err)
+  }
   },
 
-  updateRecord: (req, res) => {
+  updateRecord: async (req, res) => {
+    try {
     const userId = req.user._id
     const _id = req.params.id
-    const record = req.body
+    const updateRecord = req.body
 
-    if (record.merchant.length === 0) {
-      record.merchant = '其他'
+    if (updateRecord.merchant.length === 0) {
+      updateRecord.merchant = '其他'
     }
-
-    Category.findOne({ title: record.category })
-      .then(category => {
-        record.category = category._id
-        return Record.findOneAndUpdate({ _id, userId }, record)
-          .then(record => {
-            req.flash('success_msg', '已成功修改此筆記錄!')
-            return res.redirect('/')
-          })
-          .catch(error => res.status(404))
-      })
-      .catch(error => res.status(404))
+    const [category,record] = await Promise.all([Category.findOne({ _id: updateRecord.category }),Record.findOneAndUpdate({ _id, userId }, updateRecord)])
+      req.flash('success_msg', '已成功修改此筆記錄!')
+      return res.redirect('/')
+      } catch (err) {
+    console.log(err)
+    }
   },
-  deleteRecord: (req, res) => {
+  deleteRecord: async (req, res) => {
+    try {
     const userId = req.user._id
     const _id = req.params.id
-    return Record.findOneAndDelete({ _id, userId })
-      .then(record => {
-        req.flash('success_msg', ` ${record.name}此筆記錄已成功刪除!`)
-        res.redirect('/')
-      })
-      .catch(error => res.status(404))
+    const record =await Record.findOneAndDelete({ _id, userId })
+    req.flash('success_msg', ` ${record.name}此筆記錄已成功刪除!`)
+    res.redirect('/')
+    } catch (err) {
+    console.log(err)
+    }
   }
 }
 module.exports = recordController
