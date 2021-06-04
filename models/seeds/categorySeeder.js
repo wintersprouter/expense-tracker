@@ -14,12 +14,13 @@ const categories = [
   title: category[0],
   icon: `fas ${category[1]}`
 }))
-db.once('open', () => {
-  Category.create(categories)
-    .then(() => {
-      console.log('insert category done...')
-      return db.close()
-    }).then(() => {
-      console.log('database connection close...')
-    })
+db.once('open', async () => {
+  try {
+    await Category.create(categories)
+    console.log('insert category done...')
+    await db.close()
+    console.log('database connection close...')
+  } catch (err) {
+    console.log(err)
+  }
 })
