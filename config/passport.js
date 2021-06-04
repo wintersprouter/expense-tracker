@@ -52,10 +52,12 @@ module.exports = app => {
     done(null, user.id)
   })
 
-  passport.deserializeUser((id, done) => {
-    User.findById(id)
-      .lean()
-      .then(user => done(null, user))
-      .catch(err => done(err, null))
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await User.findById(id).lean()
+      return done(null, user)
+    } catch (err) {
+      return done(err, null)
+    }
   })
 }
