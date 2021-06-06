@@ -1,0 +1,21 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+const Type = require('../Type')
+const db = require('../../config/mongoose')
+
+const SEED_TYPE = [{
+  title:'income'
+}, {
+  title:'expense'
+}]
+db.once('open', async () => {
+  try {
+    await Type.create(SEED_TYPE)
+    console.log('insert type done...')
+    await db.close()
+    console.log('database connection close...')
+  } catch (err) {
+    console.log(err)
+  }
+})
