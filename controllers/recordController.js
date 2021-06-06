@@ -1,14 +1,31 @@
+const Type = require('../models/Type')
 const Record = require('../models/Record')
 const Category = require('../models/Category')
 
 const recordController = {
 
-  getAddRecordPage: async (req, res) => {
+  getAddExpenseRecordPage: async (req, res) => {
     try {
-      const categories = await Category.find()
+      const types = await Type.find({ title:'expense'}).lean()
+        .sort({ _id: 'asc' })
+      const typeId = types[0]._id
+      const categories = await Category.find({ typeId: typeId })
         .lean()
         .sort({ _id: 'asc' })
-      res.render('new', { categories })
+      res.render('newExpense', { categories })
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  getAddIncomeRecordPage: async (req, res) => {
+    try {
+      const types = await Type.find({ title:'income'}).lean()
+        .sort({ _id: 'asc' })
+      const typeId = types[0]._id
+      const categories = await Category.find({ typeId: typeId })
+        .lean()
+        .sort({ _id: 'asc' })
+      res.render('newIncome', { categories })
     } catch (err) {
       console.log(err)
     }

@@ -1,0 +1,67 @@
+<header>
+  <link rel="stylesheet" href="/stylesheets/edit.css">
+</header>
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link " href="/records/new/expense">支出</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/records/new/income">收入</a>
+    </li>
+  </ul>
+  <div class="create-list">
+    <div class="create-list-title">
+      <h2 class="display-5" style="color: #1895A3;">請輸入你的收入</h2>
+    </div>
+    <div class="back-button d-flex flex-row-reverse">
+      <a href="/">
+        <button type="submit" class="btn back-button-btn">回到首頁</button></a>
+    </div>
+    <div class="new-form">
+      <form action="/records" method="POST" class="create-list-form mb-3">
+        <div class="form-group row">
+          <label for="require" class="col-sm-4 col-form-label" style="color: #FF8080;">*必填欄位</label>
+        </div>
+        <div class="form-group row">
+          <label for="name" class="col-sm-3 col-form-label">名稱*：</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" placeholder="收入名稱" name="name" maxlength="10" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="date" class="col-sm-3 col-form-label">日期*：</label>
+          <div class="col-sm-8">
+            <input type="date" class="form-control" name="date" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="category" class="col-sm-3 col-form-label">收入類別*：</label>
+          <div class="col-sm-8">
+            <select id="category" class="form-control" name="category" placeholder="選擇支出類型" autocomplete="off" required>
+              <option value="" disabled selected>選擇類型</option>
+              {{#each categories}}
+              <option value="{{this._id}}">{{this.title}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label for="amount" class="col-sm-3 col-form-label">金額*：</label>
+          <div class="col-sm-8">
+            <input type="number" class="form-control" placeholder="收入金額" name="amount" min="0" max="100000000" step="1"
+              required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="create col-sm-8 ">
+            <button type="submit" class="btn create-button">新增收入</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

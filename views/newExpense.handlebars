@@ -2,6 +2,14 @@
   <link rel="stylesheet" href="/stylesheets/edit.css">
 </header>
 <div class="container">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link active" href="/records/new/expense">支出</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/records/new/income">收入</a>
+    </li>
+  </ul>
   <div class="create-list">
     <div class="create-list-title">
       <h2 class="display-5" style="color: #1895A3;">請輸入你的支出</h2>
@@ -21,7 +29,6 @@
           <input type="text" class="form-control" placeholder="消費品項" name="name" maxlength="10" required>
         </div>
       </div>
-
       <div class="form-group row">
         <label for="date" class="col-sm-3 col-form-label">日期*：</label>
         <div class="col-sm-8">
@@ -30,7 +37,7 @@
       </div>
 
       <div class="form-group row">
-        <label for="category" class="col-sm-3 col-form-label">類別*：</label>
+        <label for="category" class="col-sm-3 col-form-label">支出類別*：</label>
         <div class="col-sm-8">
           <select id="category" class="form-control" name="category" placeholder="選擇支出類型" autocomplete="off" required>
             <option value="" disabled selected>選擇類型</option>
