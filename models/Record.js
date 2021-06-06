@@ -16,9 +16,6 @@ const recordSchema = new Schema({
     min: [1, 'at least one dollar'],
     required: true
   },
-  totalAmount: {
-    type: Number
-  },
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -28,6 +25,11 @@ const recordSchema = new Schema({
   category: {
     type: Schema.Types.ObjectId,
     ref: 'Category'
+  },
+  typeId:{
+    type: Schema.Types.ObjectId,
+    ref: 'Type',
+    required: true
   }
 })
 module.exports = mongoose.model('Record', recordSchema)
