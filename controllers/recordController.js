@@ -17,7 +17,7 @@ const recordController = {
       console.log(err)
     }
   },
-  getAddIncomeRecordPage: async (req, res) => {
+  getAddIncomeRecordPage: async (req, res) => { 
     try {
       const types = await Type.find({ title:'income'}).lean()
         .sort({ _id: 'asc' })
@@ -31,7 +31,7 @@ const recordController = {
     }
   },
 
-  addRecord: async (req, res) => {
+  addExpenseRecord: async (req, res) => {
     try {
       const newRecord = req.body
       if (newRecord.merchant.length === 0) {
@@ -42,7 +42,20 @@ const recordController = {
       const [category, record] = await Promise.all([
         Category.findOne({ _id: newRecord.category }), Record.create(newRecord)
       ])
-      req.flash('success_msg', `已成功新增${record.name}的記錄!`)
+      req.flash('success_msg', `已成功新增${record.name}的支出記錄!`)
+      return res.redirect('/')
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  addIncomeRecord: async (req, res) => {
+    try {
+      const newRecord = req.body
+      newRecord.userId = req.user._id
+      const [category, record] = await Promise.all([
+        Category.findOne({ _id: newRecord.category }), Record.create(newRecord)
+      ])
+      req.flash('success_msg', `已成功新增${record.name}的收入記錄!`)
       return res.redirect('/')
     } catch (err) {
       console.log(err)
