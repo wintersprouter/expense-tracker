@@ -5,14 +5,10 @@ const typeSchema = new Schema({
     type: String,
     required: true
   },
-  records: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Record'
-  }],
-  categories: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Category'
-  }]
+  title_Ch:{
+    type: String,
+    required: true
+  }
 })
 
 module.exports = mongoose.model('Type', typeSchema)

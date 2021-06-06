@@ -34,10 +34,10 @@ db.once('open', () => {
           .then(categories => categories.map(category => category._id))
           .then(categoriesId => {
             const SEED_RECORDS = []
-            for (let i = 1; i < 31; i++) {
+            for (let i = 1; i < 41; i++) {
               SEED_RECORDS.push({
                 name: faker.commerce.product(),
-                category: categoriesId[i % 5],
+                category: categoriesId[i % 10],
                 date: faker.date.past(1, new Date(2021, 12, 31)),
                 amount: faker.commerce.price(),
                 merchant: faker.company.companyName(),
