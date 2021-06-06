@@ -21,3 +21,14 @@ h2,
 small {
   color: #ff8080;
 }
+.row {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+  .register {
+    width: 75%;
+    margin: 0 auto;
+  }
+}

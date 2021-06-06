@@ -1,67 +1,60 @@
-.container {
-  /* outline: 3px solid rgb(61, 13, 184); */
-  padding: 0 25px;
+.amount-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  grid-gap: 1rem;
+  width: 100%;
+  height: 100%;
 }
-.total-amount {
-  /* outline: 3px solid rgb(184, 13, 127); */
-  width: 590px;
-
-  margin: auto;
-}
-.filter-options {
-  /* outline: 3px solid rgb(12, 9, 233); */
-  width: 590px;
-  margin: 10px auto;
-}
-.select-form {
-  /* outline: 3px solid rgb(19, 37, 2); */
-  width: 400px;
-  margin: 2px;
-}
-@media (max-width: 576px) {
-  .total-amount {
-    width: 320px;
-  }
-  .filter-options {
-    width: 320px;
-  }
-  .reset-button,
-  .create-button {
-    text-align: right;
-  }
+.amount-income,
+.amount-expense,
+.amount-balance {
+  height: 100%;
+  border-radius: 5px;
+  background-color: lightyellow;
+  -webkit-box-shadow: 2px 10px 12px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 2px 10px 12px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 10px 12px 0px rgba(0, 0, 0, 0.1);
 }
 
-@media (min-width: 577px) and (max-width: 1000px) {
-  .filter-options {
-    width: 590px;
-  }
-
-  .reset-button,
-  .create-button {
-    text-align: right;
-  }
+.amount-description::before {
+  content: "$";
+  color: orange;
 }
-.category-select,
-.month-select {
-  height: 40px;
+.amount-text {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #4a4a4a;
+}
+.amount-title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.1rem;
+  color: #1a5366;
+}
+.amount-description {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01rem;
+}
+.buttons-wrapper {
+  width: 100%;
   margin-top: 5px;
-  margin-bottom: 2px;
 }
-.reset-button {
-  height: 40px;
-  margin-top: 5px;
+.button-month .button-category .button-reset {
+  height: 100%;
+  width: 100%;
+  margin-right: 5px;
 }
 
 .list-group {
-  max-width: 590px;
+  width: 100%;
   margin: 10px auto;
 }
 
-.record {
-  border-radius: 20%;
-}
 .record-text {
-  margin-top: 10px;
+  margin: 10px 10px 10px 0;
 }
 .list-icon {
   color: #53c9a6;
@@ -81,4 +74,52 @@
 .record-amount-text {
   font-weight: bold;
   font-size: 2rem;
+}
+optgroup {
+  font-size: 2rem;
+}
+.button-month {
+  margin-top: 15px;
+}
+.button-month,
+.button-category,
+.button-reset {
+  margin-bottom: 15px;
+}
+option {
+  padding: 5px;
+}
+.record-date {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.reset-select {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .list-group {
+    width: 75%;
+  }
+  .select-form {
+    position: relative;
+    width: 75%;
+    margin: 5px auto;
+  }
+
+  .buttons-wrapper {
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin: 0 0;
+    justify-content: flex-start;
+  }
+  .button-category,
+  .button-reset {
+    margin-top: 15px;
+  }
+  .button-category,
+  .button-month {
+    margin-right: 15px;
+  }
 }
