@@ -1,7 +1,68 @@
 <header><link rel="stylesheet" href="/stylesheets/index.css"></header>
 <div class="container d-flex flex-column justify-content-center ">
   {{> message}}
+  
   <div class="amount-wrapper">
+    {{#if filteredCategory }}
+    {{#ifCond filteredCategory 'income'}}
+      <div class="amount-income">
+        <div class="amount-text">
+          <h4 class="amount-title">
+            {{#ifCond filteredMonthText 'all'}}所有月份收入
+            {{else}}
+            {{filteredMonthText}}
+            月份收入
+            {{/ifCond}}<i class="fas fa-hand-holding-usd ml-1"></i></h4>
+          <p class="amount-description">{{incomeAmountText}}</p>
+        </div>
+      </div>
+      {{/ifCond}}
+      {{#ifCond filteredCategory 'expense'}}
+      <div class="amount-expense">
+        <div class="amount-text">
+          <h4 class="amount-title">{{#ifCond filteredMonthText 'all'}}所有月份支出
+          {{else}}
+          {{filteredMonthText}}
+          月份支出
+          {{/ifCond}}<i class="fas fa-receipt ml-1"></i></h4>
+          <p class="amount-description">{{expenseAmountText}}</p>
+        </div>
+      </div>
+      {{/ifCond}}
+      {{#ifCond filteredCategory 'all'}}
+      <div class="amount-month">
+        <div class="amount-text">
+          <h4 class="amount-title" id="amount-month-title">{{#ifCond filteredMonthText 'all'}}所有月份
+          {{else}}
+          {{filteredMonthText}}
+          月份
+          {{/ifCond}}
+        </div>
+      </div>
+
+      <div class="amount-income">
+        <div class="amount-text">
+          <h4 class="amount-title">收入     
+      <i class="fas fa-hand-holding-usd ml-1"></i></h4>
+          <p class="amount-description">{{incomeAmountText}}</p>
+        </div>
+      </div>
+      <div class="amount-expense">
+        <div class="amount-text">
+          <h4 class="amount-title">支出
+        <i class="fas fa-receipt ml-1"></i></h4>
+          <p class="amount-description">{{expenseAmountText}}</p>
+        </div>
+      </div>
+      <div class="amount-balance">
+        <div class="amount-text">
+          <h4 class="amount-title">結餘
+          <i class="fas fa-donate ml-1"></i></h4>
+          <p class="amount-description ">{{balanceAmountText}}</p>
+        </div>
+      </div>
+      {{/ifCond}}
+    {{else}}
     <div class="amount-income">
       <div class="amount-text">
         <h4 class="amount-title">收入<i class="fas fa-hand-holding-usd ml-1"></i></h4>
@@ -20,6 +81,7 @@
       <p class="amount-description ">{{balanceAmountText}}</p>
       </div>
     </div>
+    {{/if }}
   </div>
   
     <form action="/filter" method="GET" class="select-form">
@@ -40,21 +102,10 @@
       <select name="category" class="category-select form-control  form-control-lg mt-1" id="category" onChange="this.form.submit()"
         style="cursor: pointer;">
         <option value="all" name="filteredCategory" {{#ifCond " all"../filteredCategory }} selected {{/ifCond}}>
-        所有支出</option>
-        {{#each expenseCategories}}
-        <option value="{{this._id}}" name="filteredCategory" {{#ifCond this._id ../filteredCategory }} selected
-          {{/ifCond}}>{{this.title}}</option>
-        {{/each}}
-      </select>
-    </div>
-    <div class="button-category">
-      <select name="category" class="category-select form-control  form-control-lg mt-1" id="category"
-        onChange="this.form.submit()" style="cursor: pointer;">
-        <option value="all" name="filteredCategory" {{#ifCond " all" ../filteredCategory }} selected {{/ifCond}}>
-          所有收入</option>
-        {{#each incomeCategories}}
-        <option value="{{this._id}}" name="filteredCategory" {{#ifCond this._id ../filteredCategory }} selected {{/ifCond}}>
-          {{this.title}}</option>
+        所有收支</option>
+        {{#each types}}
+        <option value="{{this.title}}" name="filteredCategory" {{#ifCond this.title ../filteredCategory }} selected
+          {{/ifCond}}>{{this.title_Ch}}</option>
         {{/each}}
       </select>
     </div>

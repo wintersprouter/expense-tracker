@@ -15,20 +15,11 @@ const homeController = {
       }
       const [types, categories, records] =
       await Promise.all([
-        Type.find({}).lean().sort({ _id: 'asc' }),
+        Type.find().lean().sort({ _id: 'asc' }),
         Category.find().populate({ path: 'typeId', select: 'title' }).lean().sort({ _id: 'asc' }),
         Record.find({ userId }).populate('category').lean().sort({ date: 'desc' })
       ])
 
-      const expenseCategories = []
-      const incomeCategories = []
-      categories.forEach(category => {
-        if (category.typeId.title === 'expense') {
-          expenseCategories.push(category)
-        } else {
-          incomeCategories.push(category)
-        }
-      })
       const expenseRecords = []
       const incomeRecords = []
       records.forEach(record => {
@@ -43,7 +34,7 @@ const homeController = {
       const expenseAmountText = getTotalAmount(expenseRecords)
       const balanceAmountText = (Number(incomeAmountText) - Number(expenseAmountText)).toString()
 
-      return res.render('index', { incomeCategories, expenseCategories, months, records, incomeAmountText, expenseAmountText, balanceAmountText })
+      return res.render('index', { types, months, records, incomeAmountText, expenseAmountText, balanceAmountText })
     } catch (err) {
       console.log(err)
     }
@@ -64,7 +55,7 @@ const homeController = {
       }
 
       if (filteredCategory !== 'all') {
-        filter.category = filteredCategory
+        filter.type = filteredCategory
       }
 
       if (filteredMonth >= 0) {
@@ -77,18 +68,37 @@ const homeController = {
           $lte: endTime
         }
       }
-      const [categories, records] = await Promise.all([
-        Category.find({}).lean().sort({ _id: 'asc' }), Record.find(filter).populate('category').lean().sort({ date: 'desc' })
-      ])
 
-      categories.forEach(category => {
-        category._id = JSON.stringify(category._id).slice(1, -1)
-      })
-      const totalAmountText = getTotalAmount(records)
+      const [types, categories, records] =
+      await Promise.all([
+        Type.find().lean().sort({ _id: 'asc' }),
+        Category.find().populate({ path: 'typeId', select: 'title' }).lean().sort({ _id: 'asc' }),
+        Record.find(filter).populate('category').lean().sort({ date: 'desc' })
+      ])
+      const expenseRecords = []
+      const incomeRecords = []
       records.forEach(record => {
         record.date = record.date.toJSON().substr(0, 10)
+        if (record.type === 'expense') {
+          expenseRecords.push(record)
+        } else {
+          incomeRecords.push(record)
+        }
       })
-      return res.render('index', { records, totalAmountText, categories, months, filteredCategory, filteredMonthText })
+      const incomeAmountText = getTotalAmount(incomeRecords)
+      const expenseAmountText = getTotalAmount(expenseRecords)
+      const balanceAmountText = (Number(incomeAmountText) - Number(expenseAmountText)).toString()
+
+      return res.render('index', {
+        records,
+        types,
+        filteredCategory,
+        months,
+        incomeAmountText,
+        expenseAmountText,
+        balanceAmountText,
+        filteredMonthText
+      })
     } catch (err) {
       console.log(err)
     }
