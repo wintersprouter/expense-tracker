@@ -32,7 +32,7 @@ const homeController = {
       })
 
       let noRecord = false
-        if (records.length === 0) noRecord = true
+      if (records.length === 0) noRecord = true
 
       const incomeAmountText = getTotalAmount(incomeRecords)
       const expenseAmountText = getTotalAmount(expenseRecords)
@@ -90,7 +90,7 @@ const homeController = {
         }
       })
       let noRecord = false
-        if (records.length === 0) noRecord = true
+      if (records.length === 0) noRecord = true
 
       const incomeAmountText = getTotalAmount(incomeRecords)
       const expenseAmountText = getTotalAmount(expenseRecords)
