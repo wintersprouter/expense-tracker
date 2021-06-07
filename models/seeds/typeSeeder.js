@@ -5,11 +5,11 @@ const Type = require('../Type')
 const db = require('../../config/mongoose')
 
 const SEED_TYPE = [{
-  title:'income',
-  title_Ch:'收入'
+  title: 'income',
+  title_Ch: '收入'
 }, {
-  title:'expense',
-  title_Ch:'支出'
+  title: 'expense',
+  title_Ch: '支出'
 }]
 db.once('open', async () => {
   try {

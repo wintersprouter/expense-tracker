@@ -1,6 +1,8 @@
+const Type = require('../models/Type')
 const Category = require('../models/Category')
 const Record = require('../models/Record')
 const { getTotalAmount } = require('../public/javascripts/getTotalAmount')
+const { Types } = require('mongoose')
 
 const homeController = {
 
@@ -11,12 +13,37 @@ const homeController = {
       for (let i = 0; i < 12; i++) {
         months.push({ month: `${i + 1}` })
       }
-      const [categories, records] = await Promise.all([Category.find().lean().sort({ _id: 'asc' }), Record.find({ userId }).populate('category').lean().sort({ date: 'desc' })])
-      const totalAmountText = getTotalAmount(records)
+      const [types, categories, records] =
+      await Promise.all([
+        Type.find({}).lean().sort({ _id: 'asc' }),
+        Category.find().populate({ path: 'typeId', select: 'title' }).lean().sort({ _id: 'asc' }),
+        Record.find({ userId }).populate('category').lean().sort({ date: 'desc' })
+      ])
+
+      const expenseCategories = []
+      const incomeCategories = []
+      categories.forEach(category => {
+        if (category.typeId.title === 'expense') {
+          expenseCategories.push(category)
+        } else {
+          incomeCategories.push(category)
+        }
+      })
+      const expenseRecords = []
+      const incomeRecords = []
       records.forEach(record => {
         record.date = record.date.toJSON().substr(0, 10)
+        if (record.type === 'expense') {
+          expenseRecords.push(record)
+        } else {
+          incomeRecords.push(record)
+        }
       })
-      return res.render('index', { records, totalAmountText, categories, months })
+      const incomeAmountText = getTotalAmount(incomeRecords)
+      const expenseAmountText = getTotalAmount(expenseRecords)
+      const balanceAmountText = (Number(incomeAmountText) - Number(expenseAmountText)).toString()
+
+      return res.render('index', { incomeCategories, expenseCategories, months, records, incomeAmountText, expenseAmountText, balanceAmountText })
     } catch (err) {
       console.log(err)
     }

@@ -9,7 +9,7 @@ const categorySchema = new Schema({
   icon: {
     type: String
   },
-  typeId:{
+  typeId: {
     type: Schema.Types.ObjectId,
     ref: 'Type'
   },

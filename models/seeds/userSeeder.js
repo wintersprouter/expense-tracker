@@ -41,6 +41,15 @@ db.once('open', () => {
                 date: faker.date.past(1, new Date(2021, 12, 31)),
                 amount: faker.commerce.price(),
                 merchant: faker.company.companyName(),
+                type: 'expense',
+                userId
+              })
+              SEED_RECORDS.push({
+                name: faker.commerce.product(),
+                category: categoriesId[i % 10],
+                date: faker.date.past(1, new Date(2021, 12, 31)),
+                amount: faker.commerce.price(),
+                type: 'income',
                 userId
               })
             }

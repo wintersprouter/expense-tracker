@@ -5,19 +5,19 @@
     <div class="amount-income">
       <div class="amount-text">
         <h4 class="amount-title">收入<i class="fas fa-hand-holding-usd ml-1"></i></h4>
-        <p class="amount-description">0</p>
+        <p class="amount-description">{{incomeAmountText}}</p>
       </div>
     </div>
     <div class="amount-expense">
         <div class="amount-text">
       <h4 class="amount-title">支出<i class="fas fa-receipt ml-1"></i></h4>
-      <p class="amount-description">{{totalAmountText}}</p>
+      <p class="amount-description">{{expenseAmountText}}</p>
       </div>
     </div>
     <div class="amount-balance">
       <div class="amount-text">
       <h4 class="amount-title">結餘<i class="fas fa-donate ml-1"></i></h4>
-      <p class="amount-description ">4566666625</p>
+      <p class="amount-description ">{{balanceAmountText}}</p>
       </div>
     </div>
   </div>
@@ -40,10 +40,21 @@
       <select name="category" class="category-select form-control  form-control-lg mt-1" id="category" onChange="this.form.submit()"
         style="cursor: pointer;">
         <option value="all" name="filteredCategory" {{#ifCond " all"../filteredCategory }} selected {{/ifCond}}>
-        所有類別</option>
-        {{#each categories}}
+        所有支出</option>
+        {{#each expenseCategories}}
         <option value="{{this._id}}" name="filteredCategory" {{#ifCond this._id ../filteredCategory }} selected
           {{/ifCond}}>{{this.title}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="button-category">
+      <select name="category" class="category-select form-control  form-control-lg mt-1" id="category"
+        onChange="this.form.submit()" style="cursor: pointer;">
+        <option value="all" name="filteredCategory" {{#ifCond " all" ../filteredCategory }} selected {{/ifCond}}>
+          所有收入</option>
+        {{#each incomeCategories}}
+        <option value="{{this._id}}" name="filteredCategory" {{#ifCond this._id ../filteredCategory }} selected {{/ifCond}}>
+          {{this.title}}</option>
         {{/each}}
       </select>
     </div>
@@ -81,11 +92,17 @@
         <div class="col-sm-4 d-flex flex-column justify-content-center record-text mx-2">
           <h2 style="font-size: 1.5rem;color:#1895A3;font-weight:bold;"class="mb-2">{{this.name}}</h2>
           <h3 style="font-size:1em;"class="record-date">{{this.date}}</h3>
+          {{#ifCond this.type 'expense'}}
           <h3 style="font-size: 0.9rem;">{{this.merchant}}</h3>
+          {{/ifCond}}
         </div>
 
         <div class="col-sm-1 d-flex justify-content-end pl-2">
-          <div class="record-amount-text ml-1 " style="color:#1895A3;font-size: 2rem">${{this.amount}}</div>
+          {{#ifCond this.type 'expense'}}
+          <div class="record-amount-text ml-1 " style="color:#FF8080;font-size: 2rem"> -${{this.amount}}</div>{{else}}
+          <div class="record-amount-text ml-1 " style="color:#1895A3;font-size: 2rem"> ${{this.amount}}</div>
+          {{/ifCond}}
+      
         </div>
         <div class="col-sm-3 d-flex justify-content-between ml-2">
           <a href=" /records/{{this._id}}/edit"><i class="fas fa-edit fa-2x"></i></a>
@@ -96,34 +113,33 @@
         </div>
       </div>
     </li>
-    <!-- Modal -->
-    <div class="modal fade delete" id="delete{{this._id}}" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel" style="color: #FF8080;">NOTICE</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            確定要刪除
-            <span style="color:#1895A3;font-weight:bold;">
-              {{this.name}}
-            </span>這筆支出？
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
-            </button>
-            <form action="/records/{{ this._id }}?_method=DELETE" method="POST" ;>
-              <button type="submit" class="btn " style="background-color: #FF8080 ;color: #f7f7f7;">Delete</button>
-            </form>
+      <!-- Modal -->
+      <div class="modal fade delete" id="delete{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel" style="color: #FF8080;">NOTICE</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              確定要刪除
+              <span style="color:#1895A3;font-weight:bold;">
+                {{this.name}}
+              </span>這筆{{#ifCond this.type 'expense'}}支出{{else}}收入{{/ifCond}}？
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+              </button>
+              <form action="/records/{{ this._id }}?_method=DELETE" method="POST" ;>
+                <button type="submit" class="btn " style="background-color: #FF8080 ;color: #f7f7f7;">Delete</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-
-    </div>
-    {{/each}}
-  </ul>
-</div>
+      {{/each}}
+      </ul>
+      </div>

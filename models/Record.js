@@ -16,6 +16,10 @@ const recordSchema = new Schema({
     min: [1, 'at least one dollar'],
     required: true
   },
+  type: {
+    type: String,
+    required: true
+  },
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',

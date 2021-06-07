@@ -5,7 +5,7 @@ const typeSchema = new Schema({
     type: String,
     required: true
   },
-  title_Ch:{
+  title_Ch: {
     type: String,
     required: true
   }

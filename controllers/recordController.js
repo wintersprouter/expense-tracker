@@ -6,7 +6,7 @@ const recordController = {
 
   getAddExpenseRecordPage: async (req, res) => {
     try {
-      const types = await Type.find({ title:'expense'}).lean()
+      const types = await Type.find({ title: 'expense' }).lean()
         .sort({ _id: 'asc' })
       const typeId = types[0]._id
       const categories = await Category.find({ typeId: typeId })
@@ -17,9 +17,9 @@ const recordController = {
       console.log(err)
     }
   },
-  getAddIncomeRecordPage: async (req, res) => { 
+  getAddIncomeRecordPage: async (req, res) => {
     try {
-      const types = await Type.find({ title:'income'}).lean()
+      const types = await Type.find({ title: 'income' }).lean()
         .sort({ _id: 'asc' })
       const typeId = types[0]._id
       const categories = await Category.find({ typeId: typeId })
@@ -34,10 +34,11 @@ const recordController = {
   addExpenseRecord: async (req, res) => {
     try {
       const newRecord = req.body
+      newRecord.type = 'expense'
+      newRecord.userId = req.user._id
       if (newRecord.merchant.length === 0) {
         newRecord.merchant = '其他'
       }
-      newRecord.userId = req.user._id
 
       const [category, record] = await Promise.all([
         Category.findOne({ _id: newRecord.category }), Record.create(newRecord)
@@ -51,6 +52,7 @@ const recordController = {
   addIncomeRecord: async (req, res) => {
     try {
       const newRecord = req.body
+      newRecord.type = 'income'
       newRecord.userId = req.user._id
       const [category, record] = await Promise.all([
         Category.findOne({ _id: newRecord.category }), Record.create(newRecord)
