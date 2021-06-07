@@ -30,11 +30,15 @@ const homeController = {
           incomeRecords.push(record)
         }
       })
+
+      let noRecord = false
+        if (records.length === 0) noRecord = true
+
       const incomeAmountText = getTotalAmount(incomeRecords)
       const expenseAmountText = getTotalAmount(expenseRecords)
       const balanceAmountText = (Number(incomeAmountText) - Number(expenseAmountText)).toString()
 
-      return res.render('index', { types, months, records, incomeAmountText, expenseAmountText, balanceAmountText })
+      return res.render('index', { types, months, records, incomeAmountText, expenseAmountText, balanceAmountText, noRecord })
     } catch (err) {
       console.log(err)
     }
@@ -85,6 +89,9 @@ const homeController = {
           incomeRecords.push(record)
         }
       })
+      let noRecord = false
+        if (records.length === 0) noRecord = true
+
       const incomeAmountText = getTotalAmount(incomeRecords)
       const expenseAmountText = getTotalAmount(expenseRecords)
       const balanceAmountText = (Number(incomeAmountText) - Number(expenseAmountText)).toString()
@@ -97,7 +104,8 @@ const homeController = {
         incomeAmountText,
         expenseAmountText,
         balanceAmountText,
-        filteredMonthText
+        filteredMonthText,
+        noRecord
       })
     } catch (err) {
       console.log(err)

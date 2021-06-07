@@ -13,7 +13,7 @@
             {{filteredMonthText}}
             月份收入
             {{/ifCond}}<i class="fas fa-hand-holding-usd ml-1"></i></h4>
-          <p class="amount-description">{{incomeAmountText}}</p>
+          <p class="amount-description"id="income-amount">{{incomeAmountText}}</p>
         </div>
       </div>
       {{/ifCond}}
@@ -25,7 +25,7 @@
           {{filteredMonthText}}
           月份支出
           {{/ifCond}}<i class="fas fa-receipt ml-1"></i></h4>
-          <p class="amount-description">{{expenseAmountText}}</p>
+          <p class="amount-description"id="expense-amount">{{expenseAmountText}}</p>
         </div>
       </div>
       {{/ifCond}}
@@ -44,21 +44,21 @@
         <div class="amount-text">
           <h4 class="amount-title">收入     
       <i class="fas fa-hand-holding-usd ml-1"></i></h4>
-          <p class="amount-description">{{incomeAmountText}}</p>
+          <p class="amount-description"id="income-amount">{{incomeAmountText}}</p>
         </div>
       </div>
       <div class="amount-expense">
         <div class="amount-text">
           <h4 class="amount-title">支出
         <i class="fas fa-receipt ml-1"></i></h4>
-          <p class="amount-description">{{expenseAmountText}}</p>
+          <p class="amount-description"id="expense-amount">{{expenseAmountText}}</p>
         </div>
       </div>
       <div class="amount-balance">
         <div class="amount-text">
           <h4 class="amount-title">結餘
           <i class="fas fa-donate ml-1"></i></h4>
-          <p class="amount-description ">{{balanceAmountText}}</p>
+          <p class="amount-description"id="balance-amount">{{balanceAmountText}}</p>
         </div>
       </div>
       {{/ifCond}}
@@ -66,23 +66,30 @@
     <div class="amount-income">
       <div class="amount-text">
         <h4 class="amount-title">收入<i class="fas fa-hand-holding-usd ml-1"></i></h4>
-        <p class="amount-description">{{incomeAmountText}}</p>
+        <p class="amount-description" id="income-amount">{{incomeAmountText}}</p>
       </div>
     </div>
     <div class="amount-expense">
         <div class="amount-text">
       <h4 class="amount-title">支出<i class="fas fa-receipt ml-1"></i></h4>
-      <p class="amount-description">{{expenseAmountText}}</p>
+      <p class="amount-description"id="expense-amount">{{expenseAmountText}}</p>
       </div>
     </div>
     <div class="amount-balance">
       <div class="amount-text">
       <h4 class="amount-title">結餘<i class="fas fa-donate ml-1"></i></h4>
-      <p class="amount-description ">{{balanceAmountText}}</p>
+      <p class="amount-description" id="balance-amount">{{balanceAmountText}}</p>
       </div>
     </div>
     {{/if }}
   </div>
+  {{#if noRecord}}
+  
+  {{else}}
+  <div class="pie-chart">
+    <canvas id="myChart"></canvas>
+  </div>
+  {{/if}}
   
     <form action="/filter" method="GET" class="select-form">
     <div class="buttons-wrapper">
@@ -133,6 +140,12 @@
           </a>
       </div>
     </li>
+    {{#if noRecord}}
+    <div class="alert alert-danger" role="alert" style="margin: 30px 0 ;">
+      查無相關紀錄
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    {{/if}}
     {{#each records}}
     <li class="list-group-item mb-1">
       <div class="record d-flex row justify-content-between align-items-center p-2">
@@ -193,4 +206,6 @@
       </div>
       {{/each}}
       </ul>
-      </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/javascripts/getCartAmount.js"></script>
