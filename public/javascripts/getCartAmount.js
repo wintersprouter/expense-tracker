@@ -1,8 +1,32 @@
 const chart = document.getElementById('myChart').getContext('2d')
 const incomeAmount = document.getElementById('income-amount').innerText
 const expenseAmount = document.getElementById('expense-amount').innerText
-
+const categoryAmount = document.getElementById('expense-amount').innerText
 const totalAmountValue = [Number(incomeAmount), Number(expenseAmount)]
+const dataPanel = document.querySelector('#data-panel')
+
+function renderCategoryAmount(data) {
+  let rawHTML = ''
+    rawHTML += `<div class="col-sm-3">
+    <div class="mb-2">
+      <div class="card">
+        <img src="${POSTER_URL + item.image
+      }" class="card-img-top" alt="Movie Poster">
+        <div class="card-body">
+          <h5 class="card-title">${item.title}</h5>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary btn-show-movie" data-toggle="modal" data-target="#movie-modal" data-id="${item.id
+      }">More</button>
+          <button class="btn btn-info btn-add-favorite" data-id="${item.id
+      }">+</button>
+        </div>
+      </div>
+    </div>
+  </div>`
+  
+  dataPanel.innerHTML = rawHTML
+}
 
 const myChart = new Chart(chart, {
   type: 'doughnut',

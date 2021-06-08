@@ -81,7 +81,7 @@
 .delete-btn {
   border: none;
   background-color: transparent;
-  color: #ff8080;
+  color: #f05757;
 }
 .total-amount {
   padding-left: 15px;
@@ -97,6 +97,7 @@ optgroup {
 .button-month {
   margin-top: 15px;
 }
+.button-type,
 .button-month,
 .button-category,
 .button-reset {
@@ -130,10 +131,12 @@ option {
     margin: 0 0;
     justify-content: flex-start;
   }
+  .button-type,
   .button-category,
   .button-reset {
     margin-top: 15px;
   }
+  .button-type,
   .button-category,
   .button-month {
     margin-right: 15px;

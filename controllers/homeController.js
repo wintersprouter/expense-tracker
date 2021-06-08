@@ -47,6 +47,7 @@ const homeController = {
   filterRecords: async (req, res) => {
     try {
       const filteredCategory = req.query.category
+      const filteredType = req.query.type
       const filteredMonth = Number(req.query.month) - 1
       const filteredMonthText = req.query.month
       const filter = {
@@ -57,11 +58,6 @@ const homeController = {
       for (let i = 0; i < 12; i++) {
         months.push({ month: `${i + 1}` })
       }
-
-      if (filteredCategory !== 'all') {
-        filter.type = filteredCategory
-      }
-
       if (filteredMonth >= 0) {
         const today = new Date()
         const thisYear = today.getUTCFullYear()
@@ -73,12 +69,31 @@ const homeController = {
         }
       }
 
+      if (filteredType  !== 'all') {
+        filter.type = filteredType 
+        if (filteredCategory){
+        filter.category = filteredCategory
+        }
+      }
+
       const [types, categories, records] =
       await Promise.all([
         Type.find().lean().sort({ _id: 'asc' }),
         Category.find().populate({ path: 'typeId', select: 'title' }).lean().sort({ _id: 'asc' }),
         Record.find(filter).populate('category').lean().sort({ date: 'desc' })
       ])
+
+      const expenseCategories = []
+      const incomeCategories = []
+      categories.forEach(category => {
+        category._id = JSON.stringify(category._id).slice(1, -1)
+        if (category.typeId.title === 'expense') {
+          expenseCategories.push(category)
+        } else {
+          incomeCategories.push(category)
+        }
+      })
+
       const expenseRecords = []
       const incomeRecords = []
       records.forEach(record => {
@@ -91,6 +106,7 @@ const homeController = {
       })
       let noRecord = false
       if (records.length === 0) noRecord = true
+      const totalAmountText = getTotalAmount(records)
 
       const incomeAmountText = getTotalAmount(incomeRecords)
       const expenseAmountText = getTotalAmount(expenseRecords)
@@ -99,8 +115,13 @@ const homeController = {
       return res.render('index', {
         records,
         types,
+        categories,
+        expenseCategories,
+        incomeCategories,
+        filteredType ,
         filteredCategory,
         months,
+        totalAmountText,
         incomeAmountText,
         expenseAmountText,
         balanceAmountText,

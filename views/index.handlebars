@@ -3,8 +3,10 @@
   {{> message}}
   
   <div class="amount-wrapper">
-    {{#if filteredCategory }}
-    {{#ifCond filteredCategory 'income'}}
+    {{!--選 type wrapper--}}
+    {{#if filteredType }}
+    {{!-- type 選 income wrapper --}}
+    {{#ifCond filteredType 'income'}}
       <div class="amount-income">
         <div class="amount-text">
           <h4 class="amount-title">
@@ -17,19 +19,27 @@
         </div>
       </div>
       {{/ifCond}}
-      {{#ifCond filteredCategory 'expense'}}
+      {{!-- type 選 income wrapper--}}
+
+      {{!-- type 選expense wrapper--}}
+      {{#ifCond filteredType 'expense'}}
       <div class="amount-expense">
         <div class="amount-text">
-          <h4 class="amount-title">{{#ifCond filteredMonthText 'all'}}所有月份支出
+          <h4 class="amount-title">
+          {{#ifCond filteredMonthText 'all'}}所有月份支出
           {{else}}
           {{filteredMonthText}}
           月份支出
-          {{/ifCond}}<i class="fas fa-receipt ml-1"></i></h4>
-          <p class="amount-description"id="expense-amount">{{expenseAmountText}}</p>
+          {{/ifCond}}
+          <i class="fas fa-receipt ml-1"></i></h4>
+          <p class="amount-description"id="expense-amount">{{totalAmountText}}</p>
         </div>
       </div>
       {{/ifCond}}
-      {{#ifCond filteredCategory 'all'}}
+      {{!-- type 選expense wrapper--}}
+
+      {{!-- type 選all wrapper--}}
+      {{#ifCond filteredType 'all'}}
       <div class="amount-month">
         <div class="amount-text">
           <h4 class="amount-title" id="amount-month-title">{{#ifCond filteredMonthText 'all'}}所有月份
@@ -39,7 +49,6 @@
           {{/ifCond}}
         </div>
       </div>
-
       <div class="amount-income">
         <div class="amount-text">
           <h4 class="amount-title">收入     
@@ -62,7 +71,11 @@
         </div>
       </div>
       {{/ifCond}}
-    {{else}}
+        {{!-- type選all wrapper--}}
+        
+        
+        {{else}}
+        {{!-- type未選原始狀態 --}}
     <div class="amount-income">
       <div class="amount-text">
         <h4 class="amount-title">收入<i class="fas fa-hand-holding-usd ml-1"></i></h4>
@@ -81,21 +94,34 @@
       <p class="amount-description" id="balance-amount">{{balanceAmountText}}</p>
       </div>
     </div>
-    {{/if }}
+    {{/if}}
   </div>
+
+  {{!-- pie chart  --}}
+  
   {{#if noRecord}}
-  
+
   {{else}}
-  <div class="pie-chart">
-    <canvas id="myChart"></canvas>
-  </div>
+
+      {{#if filteredType}}
+
+      {{#ifCond filteredType 'all'}}
+      <div class="pie-chart">
+        <canvas id="myChart"></canvas>
+      </div>
+      {{/ifCond}}
+
+      {{else}}
+      <div class="pie-chart">
+        <canvas id="myChart"></canvas>
+      </div>
+      {{/if}}
   {{/if}}
-  
+  {{!-- options --}}
     <form action="/filter" method="GET" class="select-form">
     <div class="buttons-wrapper">
       <div class="button-month">
-    <select name="month" class="month-select form-control  form-control-lg mt-1" id="month" onChange="this.form.submit()"
-      style="cursor: pointer;">
+    <select name="month" class="month-select form-control  form-control-lg mt-1" id="month" onChange="this.form.submit()"style="cursor: pointer;">
       <option value="all" name="filteredMonth" {{#ifCond this.month ../filteredMonthText }} selected {{/ifCond}}>
         {{this.month}}所有月份</option>
         {{#each months}}
@@ -105,27 +131,44 @@
       </select>
       </div>
 
-    <div class="button-category">
-      <select name="category" class="category-select form-control  form-control-lg mt-1" id="category" onChange="this.form.submit()"
+    <div class="button-type">
+      <select name="type" class="type-select form-control  form-control-lg mt-1" id="type" onChange="this.form.submit()"
         style="cursor: pointer;">
-        <option value="all" name="filteredCategory" {{#ifCond " all"../filteredCategory }} selected {{/ifCond}}>
+        <option value="all" name="filteredType" {{#ifCond " all"../filteredType }} selected {{/ifCond}}>
         所有收支</option>
         {{#each types}}
-        <option value="{{this.title}}" name="filteredCategory" {{#ifCond this.title ../filteredCategory }} selected
+        <option value="{{this.title}}" name="filteredType" id="type-amount" {{#ifCond this.title ../filteredType}} selected
           {{/ifCond}}>{{this.title_Ch}}</option>
         {{/each}}
       </select>
     </div>
+    {{#if noRecord}}
+    
+    {{else}}
+    {{!-- if expense 有記錄，render expense category options --}}
+    {{#ifCond filteredType 'expense'}}
+  <div class="button-category">
+    <select name="category" class="category-select form-control  form-control-lg mt-1" id="category"
+      onChange="this.form.submit()" style="cursor: pointer;">
+      <option value='' name="filteredCategory"> 選擇支出類別</option>
+      {{#each expenseCategories}}
+      <option value="{{this._id}}" name="filteredCategory" {{#ifCond this._id ../filteredCategory}} selected {{/ifCond}}>
+        {{this.title}}</option>
+      {{/each}}
+    </select>
+  </div>
+      {{/ifCond}}
+      {{/if}}
       <div class="button-reset">
-        {{#if filteredCategory}} <a href="../"><button type="button" class="btn btn-primary mt-1  btn-lg reset-select">Reset</button></a>{{/if
+        {{#if filteredType}} <a href="../"><button type="button" class="btn btn-primary mt-1  btn-lg reset-select">Reset</button></a>{{/if
         }}
       </div>
-      </div>
-    </form>
+    </div>
+  </form>
   
 
 
-  <ul class="list-group">
+  <ul class="list-group mb-5">
     <li class="list-group-item mb-1">
       <div class="record d-flex row justify-content-center align-items-center">
         <div class="add-record">
@@ -150,7 +193,11 @@
     <li class="list-group-item mb-1">
       <div class="record d-flex row justify-content-between align-items-center p-2">
         <div class="col-sm-1">
-          <div class="record-icon ml-2"><i class="{{this.category.icon}} fa-3x list-icon"></i></div>
+          {{#ifCond this.type 'expense'}}
+          <div class="record-icon ml-2"><i class="{{this.category.icon}} fa-3x "style="color:#FF8080;"></i></div>
+          {{else}}
+          <div class="record-icon ml-2"><i class="{{this.category.icon}} fa-3x " style="color:#53c9a6;"></i></div>
+          {{/ifCond}}
         </div>
 
         <div class="col-sm-4 d-flex flex-column justify-content-center record-text mx-2">
@@ -183,7 +230,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel" style="color: #FF8080;">NOTICE</h5>
+              <h5 class="modal-title" id="exampleModalLabel" style="color: #e44141;">NOTICE</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -198,7 +245,7 @@
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
               </button>
               <form action="/records/{{ this._id }}?_method=DELETE" method="POST" ;>
-                <button type="submit" class="btn " style="background-color: #FF8080 ;color: #f7f7f7;">Delete</button>
+                <button type="submit" class="btn " style="background-color: #e44141; ;color: #f7f7f7;">Delete</button>
               </form>
             </div>
           </div>
