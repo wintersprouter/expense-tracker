@@ -61,7 +61,9 @@ const homeController = {
       records.forEach(record => {
         record.date = record.date.toJSON().substr(0, 10)
       })
-      return res.render('index', { records, totalAmountText, categories, months, filteredCategory, filteredMonthText })
+      let noRecord = false
+      if (records.length === 0) noRecord = true
+      return res.render('index', { records, totalAmountText, categories, months, filteredCategory, filteredMonthText, noRecord })
     } catch (err) {
       console.log(err)
     }

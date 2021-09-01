@@ -22,7 +22,7 @@ const recordController = {
       }
       newRecord.userId = req.user._id
 
-      const [category, record] = await Promise.all([
+      const record = await Promise.all([
         Category.findOne({ _id: newRecord.category }), Record.create(newRecord)
       ])
       req.flash('success_msg', `已成功新增${record.name}的記錄!`)
@@ -53,7 +53,7 @@ const recordController = {
       if (updateRecord.merchant.length === 0) {
         updateRecord.merchant = '其他'
       }
-      const [category, record] = await Promise.all([Category.findOne({ _id: updateRecord.category }), Record.findOneAndUpdate({ _id, userId }, updateRecord)])
+      await Promise.all([Category.findOne({ _id: updateRecord.category }), Record.findOneAndUpdate({ _id, userId }, updateRecord)])
       req.flash('success_msg', '已成功修改此筆記錄!')
       return res.redirect('/')
     } catch (err) {

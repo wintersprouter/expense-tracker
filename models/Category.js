@@ -9,6 +9,9 @@ const categorySchema = new Schema({
   icon: {
     type: String
   },
+  className: {
+    type: String
+  },
   records: [{
     type: Schema.Types.ObjectId,
     ref: 'Record'
