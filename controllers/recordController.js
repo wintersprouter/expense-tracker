@@ -22,10 +22,10 @@ const recordController = {
       }
       newRecord.userId = req.user._id
 
-      const record = await Promise.all([
+      await Promise.all([
         Category.findOne({ _id: newRecord.category }), Record.create(newRecord)
       ])
-      req.flash('success_msg', `已成功新增${record.name}的記錄!`)
+      req.flash('success_msg', '已成功新增支出記錄!')
       return res.redirect('/')
     } catch (err) {
       console.log(err)
