@@ -5,14 +5,15 @@ const Category = require('../Category')
 const db = require('../../config/mongoose')
 
 const categories = [
-  ['家居物業', 'fa-home'],
-  ['交通出行', 'fa-shuttle-van'],
-  ['休閒娛樂', 'fa-grin-beam'],
-  ['餐飲食品', 'fa-utensils'],
-  ['其他', 'fa-pen']
+  ['家居物業', 'fa-home', 'home'],
+  ['交通出行', 'fa-shuttle-van', 'traffic'],
+  ['休閒娛樂', 'fa-grin-beam', 'entertainment'],
+  ['餐飲食品', 'fa-utensils', 'food'],
+  ['其他', 'fa-pen', 'else']
 ].map(category => ({
   title: category[0],
-  icon: `fas ${category[1]}`
+  icon: `fas ${category[1]}`,
+  className: category[3]
 }))
 db.once('open', async () => {
   try {
