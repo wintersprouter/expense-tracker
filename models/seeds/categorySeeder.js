@@ -9,7 +9,7 @@ const categories = [
   ['交通出行', 'fa-shuttle-van', 'traffic'],
   ['休閒娛樂', 'fa-grin-beam', 'entertainment'],
   ['餐飲食品', 'fa-utensils', 'food'],
-  ['其他', 'fa-pen', 'else']
+  ['其他', 'fa-pen', 'other']
 ].map(category => ({
   title: category[0],
   icon: `fas ${category[1]}`,

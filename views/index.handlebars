@@ -9,11 +9,8 @@
       </h3>
     </div>
     <div class="col-sm-6">
-      <h1 class="display-3" style="color: #FF8080;">${{totalAmountText}}</h1>
+      <h1 class="display-3" style="color: #FF8080;" id="expense-amount">${{totalAmountText}}</h1>
     </div>
-  </div>
-  <div class="pie-chart">
-    <canvas id="myChart"></canvas>
   </div>
   <div class="buttons">
 
@@ -46,6 +43,12 @@
         </div>
       </form>
     </div>
+    {{#if noRecord}}
+    {{else}}
+    <div class="pie-chart">
+      <canvas id="myChart"></canvas>
+    </div>
+    {{/if}}
 
 
     <ul class="list-group">
@@ -129,4 +132,84 @@
     </ul>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="/javascripts/getCartAmount.js"></script>
+
+
+  <script>const chart = document.getElementById('myChart').getContext('2d')
+
+    const home = document.querySelectorAll('.home')
+    let homeAmount = 0
+    for (let i = 0; i < home.length; i++) {
+      homeAmount += Number(home[i].innerText.slice(1))
+    }
+
+
+    const traffic = document.querySelectorAll('.traffic')
+    let trafficAmount = 0
+    for (let i = 0; i < traffic.length; i++) {
+      trafficAmount += Number(traffic[i].innerText.slice(1))
+    }
+
+
+    const entertainment = document.querySelectorAll('.entertainment')
+    let entertainmentAmount = 0
+    for (let i = 0; i < entertainment.length; i++) {
+      entertainmentAmount += Number(entertainment[i].innerText.slice(1))
+    }
+    console.log('entertainmentAmount', entertainmentAmount)
+
+    const food = document.querySelectorAll('.food')
+    let foodAmount = 0
+    for (let i = 0; i < food.length; i++) {
+      foodAmount += Number(food[i].innerText.slice(1))
+    }
+
+    const other = document.querySelectorAll('.other')
+    let otherAmount = 0
+    for (let i = 0; i < other.length; i++) {
+      otherAmount += Number(other[i].innerText.slice(1))
+    }
+
+
+    const totalAmountValue = [entertainmentAmount, homeAmount, trafficAmount, foodAmount, otherAmount]
+    const labels = ['休閒娛樂', '家居物業', '交通出行', '餐飲食品', '其他']
+    const myChart = new Chart(chart, {
+      type: 'doughnut',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: '# of Votes',
+          data: totalAmountValue,
+          backgroundColor: [
+            '#4BC0C0',
+            '#FF6384',
+            '#FF6565',
+            '#FF9F36',
+            '#FFE633'
+          ],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        plugins: {
+          title: {
+            display: true,
+            text: '支出圓餅圖',
+            font: {
+              size: 25,
+              weight: 'bold'
+            },
+            padding: {
+              top: 10,
+              bottom: 15
+            }
+          }
+        },
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            responsive: true
+          }
+        }]
+      }
+    })
+  </script>
