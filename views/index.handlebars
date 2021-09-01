@@ -12,6 +12,9 @@
       <h1 class="display-3" style="color: #FF8080;">${{totalAmountText}}</h1>
     </div>
   </div>
+  <div class="pie-chart">
+    <canvas id="myChart"></canvas>
+  </div>
   <div class="buttons">
 
     <div class="filter-options d-flex row align-self-end">
@@ -124,3 +127,5 @@
           {{/each}}
     </ul>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/javascripts/getCartAmount.js"></script>
