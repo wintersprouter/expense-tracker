@@ -13,7 +13,7 @@ const categories = [
 ].map(category => ({
   title: category[0],
   icon: `fas ${category[1]}`,
-  className: category[3]
+  className: category[2]
 }))
 db.once('open', async () => {
   try {

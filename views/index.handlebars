@@ -84,7 +84,8 @@
               </div>
 
               <div class=" col-sm-1 d-flex justify-content-end">
-                <div class="record-amount-text" style="color:#1895A3;font-size: 2rem">${{this.amount}}</div>
+                <div class="record-amount-text {{this.category.className}}" style="color:#1895A3;font-size: 2rem">
+                  ${{this.amount}}</div>
               </div>
               <div class="col-sm-3 d-flex justify-content-between">
                 <a href=" /records/{{this._id}}/edit"><i class="fas fa-edit fa-2x"></i></a>
